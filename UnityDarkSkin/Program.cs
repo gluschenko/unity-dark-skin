@@ -74,8 +74,7 @@ namespace UnityDarkSkin
 
         static void Start()
         {
-            string Directory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            FilePath = Directory + @"\" + FileName;
+            ChooseFolder();
             Console.WriteLine("\nFile: " + FilePath);
 
             if (File.Exists(FilePath))
@@ -124,6 +123,31 @@ namespace UnityDarkSkin
             }
 
             Console.ReadKey();
+        }
+
+        static void ChooseFolder()
+        {
+            Console.WriteLine("\n--------");
+            Console.WriteLine("Is Unity.exe with this .exe?");
+            Console.WriteLine("Unity.exe is here!: type 'y'");
+            Console.WriteLine("I'll choose my Unity.exe folder: type 'n'");
+            Console.Write("Your answer: ");
+
+            ConsoleKeyInfo key = Console.ReadKey();
+            string UnityFolder = "";
+            switch (key.KeyChar)
+            {
+                case 'n':
+                    Console.Write("\nEnter your file path: ");
+                    UnityFolder = Console.ReadLine();
+                    break;
+                case 'y':
+                default:
+                    UnityFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+                    break;
+            }
+            
+            FilePath = UnityFolder + @"\" + FileName;
         }
 
         static void ToggleSkinType()
