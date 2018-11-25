@@ -74,8 +74,9 @@ namespace UnityDarkSkin
 
         static void Start()
         {
-            ChooseFolder();
-            Console.WriteLine("\nFile: " + FilePath);
+            string Directory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            FilePath = Directory + @"\" + FileName;
+            Console.WriteLine("\nSearch path: " + FilePath);
 
             if (File.Exists(FilePath))
             {
@@ -119,7 +120,7 @@ namespace UnityDarkSkin
             }
             else
             {
-                Console.WriteLine("Failed!");
+                Console.WriteLine(FileName + " not found.\nPlease copy this application to folder with " + FileName);
             }
 
             Console.ReadKey();
