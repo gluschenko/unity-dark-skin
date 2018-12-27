@@ -4,6 +4,6 @@
 
 Note: tested on 5.3, 5.4, 2017.2, 2018.2
 
-![](UnityDarkSkin/Media/Preview.jpg)
-![](UnityDarkSkin/Media/LightSkin.jpg)
-![](UnityDarkSkin/Media/DarkSkin.jpg)
+<img src='UnityDarkSkin/Media/Preview.jpg'/>
+<img src='UnityDarkSkin/Media/LightSkin.jpg'/>
+<img src='UnityDarkSkin/Media/DarkSkin.jpg'/>
