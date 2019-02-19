@@ -8,12 +8,13 @@ namespace UnityDarkSkin
     {
         static SkinType Skin;
         static Arch SystemType;
+        static bool isNewUnity;
 
         static string FilePath;
         static string FileName = "Unity.exe";
         static int BytePosition;
-        static string[] Signatures;
-        static uint[] InjectionCodes;
+
+        static byte[][] bytes;
 
         static void Main(string[] args)
         {
@@ -24,10 +25,10 @@ namespace UnityDarkSkin
 
         static void Init()
         {
-            Console.Title = "Unity Dark Skin";
+            Console.Title = "Unity Dark Skin v1.1";
             Console.WriteLine("Choose version:");
-            Console.WriteLine("Unity.exe (32 bit): type '1'");
-            Console.WriteLine("Unity.exe (64 bit): type '2'");
+            Console.WriteLine("* Unity.exe (32 bit): type '1'");
+            Console.WriteLine("* Unity.exe (64 bit): type '2'");
             Console.Write("Your answer: ");
 
             ConsoleKeyInfo key = Console.ReadKey();
@@ -41,6 +42,29 @@ namespace UnityDarkSkin
                     SystemType = Arch.x64;
                     break;
             }
+
+            Console.WriteLine("\n");
+            Console.WriteLine("----------");
+
+            if (SystemType == Arch.x64)
+            {
+                Console.WriteLine("Choose your Unity version:");
+                Console.WriteLine("* 5.0 to 2018.2: type '1'");
+                Console.WriteLine("* 2018.3 to 2019.1: type '2'");
+                Console.Write("Your answer: ");
+
+                key = Console.ReadKey();
+                switch (key.KeyChar)
+                {
+                    case '1':
+                        isNewUnity = false;
+                        break;
+                    case '2':
+                    default:
+                        isNewUnity = true;
+                        break;
+                }
+            }
         }
 
         static void Setup()
@@ -48,26 +72,28 @@ namespace UnityDarkSkin
             switch (SystemType)
             {
                 case Arch.x86:
-                    Signatures = new string[] {
-                        "750433C05EC38B065EC3CCCCCCCCCCCCCCCC",
-                        "740433C05EC38B065EC3CCCCCCCCCCCCCCCC",
-                    };
 
-                    InjectionCodes = new uint[] {
-                        3224568949U,
-                        3224568948U,
+                    bytes = new byte[][] {
+                        new byte[] { 0x75, 0x04, 0x33, 0xC0, 0x5E, 0xC3, 0x8B, 0x06, 0x5E, 0xC3, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC },
+                        new byte[] { 0x74, 0x04, 0x33, 0xC0, 0x5E, 0xC3, 0x8B, 0x06, 0x5E, 0xC3, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC }
                     };
                     break;
                 case Arch.x64:
-                    Signatures = new string[] {
-                        "750833C04883C4205BC38B034883C4205BC3",
-                        "740833C04883C4205BC38B034883C4205BC3",
-                    };
 
-                    InjectionCodes = new uint[] {
-                        3224569973U,
-                        3224569972U,
-                    };
+                    if (!isNewUnity)
+                    {
+                        bytes = new byte[][] {
+                            new byte[] { 0x75, 0x08, 0x33, 0xC0, 0x48, 0x83, 0xC4, 0x20, 0x5B, 0xC3, 0x8B, 0x03, 0x48, 0x83, 0xC4, 0x20, 0x5B, 0xC3 },
+                            new byte[] { 0x74, 0x08, 0x33, 0xC0, 0x48, 0x83, 0xC4, 0x20, 0x5B, 0xC3, 0x8B, 0x03, 0x48, 0x83, 0xC4, 0x20, 0x5B, 0xC3 }
+                        };
+                    }
+                    else
+                    {
+                        bytes = new byte[][] {
+                            new byte[] { 0x75, 0x08, 0x33, 0xC0, 0x48, 0x83, 0xC4, 0x30, 0x5B, 0xC3, 0x8B, 0x03, 0x48, 0x83, 0xC4, 0x30 },
+                            new byte[] { 0x74, 0x08, 0x33, 0xC0, 0x48, 0x83, 0xC4, 0x30, 0x5B, 0xC3, 0x8B, 0x03, 0x48, 0x83, 0xC4, 0x30 }
+                        };
+                    }
                     break;
             }
         }
@@ -82,8 +108,9 @@ namespace UnityDarkSkin
             {
                 Console.WriteLine("--------");
                 Console.WriteLine("Attention: make backup of your Unity.exe file!");
-                Console.WriteLine("Press any key to change skin...");
+                Console.WriteLine("Press Enter to change skin...");
                 Console.ReadKey();
+                Console.WriteLine("Please wait...");
 
                 BytePosition = GetBytePosition();
 
@@ -92,6 +119,7 @@ namespace UnityDarkSkin
                     if (BytePosition != 0)
                     {
                         Console.WriteLine("--------");
+                        Console.WriteLine("Please wait...");
 
                         GetSkinType(BytePosition);
                         Console.WriteLine("Current skin: " + Skin.ToString());
@@ -112,7 +140,7 @@ namespace UnityDarkSkin
                 {
                     Console.WriteLine("--------");
                     Console.WriteLine("Error is ocurred...");
-                    Console.WriteLine("Run application as an Adminisrator");
+                    Console.WriteLine("Run application as an Adminisrator: " + e.ToString());
                 }
 
                 Console.WriteLine("--------");
@@ -156,37 +184,37 @@ namespace UnityDarkSkin
             switch (Skin)
             {
                 case SkinType.Light:
-                    SwitchSkin(1);
+                    ChangeSkin(SkinType.Dark);
                     break;
                 case SkinType.Dark:
-                    SwitchSkin(0);
+                    ChangeSkin(SkinType.Light);
                     break;
             }
         }
 
-        static void SwitchSkin(int t)
+        static void ChangeSkin(SkinType skin)
         {
-            switch (t)
+            switch (skin)
             {
-                case 0:
+                case SkinType.Light:
                     using (BinaryWriter binaryWriter = new BinaryWriter((Stream)File.OpenWrite(FilePath)))
                     {
                         binaryWriter.BaseStream.Position = (long)BytePosition;
-                        binaryWriter.Write(InjectionCodes[0]);
-                        binaryWriter.Flush();
-                        binaryWriter.Close();
-                    }
-                    Skin = SkinType.Light;
-                    break;
-                case 1:
-                    using (BinaryWriter binaryWriter = new BinaryWriter((Stream)File.OpenWrite(FilePath)))
-                    {
-                        binaryWriter.BaseStream.Position = (long)BytePosition;
-                        binaryWriter.Write(InjectionCodes[1]);
+                        binaryWriter.Write(bytes[0]);
                         binaryWriter.Flush();
                         binaryWriter.Close();
                     }
                     Skin = SkinType.Dark;
+                    break;
+                case SkinType.Dark:
+                    using (BinaryWriter binaryWriter = new BinaryWriter((Stream)File.OpenWrite(FilePath)))
+                    {
+                        binaryWriter.BaseStream.Position = (long)BytePosition;
+                        binaryWriter.Write(bytes[1]);
+                        binaryWriter.Flush();
+                        binaryWriter.Close();
+                    }
+                    Skin = SkinType.Light;
                     break;
             }
         }
@@ -196,12 +224,12 @@ namespace UnityDarkSkin
             using (BinaryReader binaryReader = new BinaryReader((Stream)File.OpenRead(FilePath)))
             {
                 binaryReader.BaseStream.Position = (long)offset;
-                switch (binaryReader.ReadByte().ToString("X2"))
+                switch (binaryReader.ReadByte())
                 {
-                    case "75":
+                    case 0x75:
                         Skin = SkinType.Light;
                         break;
-                    case "74":
+                    case 0x74:
                         Skin = SkinType.Dark;
                         break;
                 }
@@ -215,14 +243,13 @@ namespace UnityDarkSkin
             int position = 0;
             using (BinaryReader binaryReader = new BinaryReader((Stream)File.OpenRead(FilePath)))
             {
-                foreach (string Signature in Signatures)
+                foreach (byte[] byteLine in bytes)
                 {
-                    byte[] SignatureBytes = StringToByteArray(Signature);
                     binaryReader.BaseStream.Position = 0L;
                     byte[] FileBytes = new byte[binaryReader.BaseStream.Length];
 
                     binaryReader.Read(FileBytes, 0, FileBytes.Length);
-                    int pos = FindSignature(FileBytes, SignatureBytes, 0);
+                    int pos = FindSignature(FileBytes, byteLine, 0);
                     if (pos != -1)
                     {
                         position = pos;
@@ -273,10 +300,10 @@ namespace UnityDarkSkin
         }
 
         // Hex string to array of bytes
-        static byte[] StringToByteArray(string hex)
+        /*static byte[] StringToByteArray(string hex)
         {
             return Enumerable.Range(0, hex.Length).Where(x => x % 2 == 0).Select((x) => Convert.ToByte(hex.Substring(x, 2), 16)).ToArray();
-        }
+        }*/
 
         enum Arch
         {
