@@ -8,7 +8,7 @@ namespace UnityDarkSkin
     {
         static SkinType Skin;
         static Arch SystemType;
-        static bool isNewUnity;
+        static VersionID Version;
 
         static string FilePath;
         static string FileName = "Unity.exe";
@@ -50,19 +50,25 @@ namespace UnityDarkSkin
             {
                 Console.WriteLine("Choose your Unity version:");
                 Console.WriteLine("* 5.0 to 2018.2: type '1'");
-                Console.WriteLine("* 2018.3 to 2019.1: type '2'");
+                Console.WriteLine("* 2018.3: type '2'");
+                Console.WriteLine("* 2019.1: type '3'");
                 Console.Write("Your answer: ");
 
                 key = Console.ReadKey();
                 switch (key.KeyChar)
                 {
                     case '1':
-                        isNewUnity = false;
+                        Version = VersionID.V_18_2_Older;
                         break;
                     case '2':
-                    default:
-                        isNewUnity = true;
+                        Version = VersionID.V_18_3;
                         break;
+                    case '3':
+                        Version = VersionID.V_19_1;
+                        break;
+                    default:
+                        throw new ArgumentException();
+
                 }
             }
         }
@@ -75,24 +81,37 @@ namespace UnityDarkSkin
 
                     bytes = new byte[][] {
                         new byte[] { 0x75, 0x04, 0x33, 0xC0, 0x5E, 0xC3, 0x8B, 0x06, 0x5E, 0xC3, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC },
-                        new byte[] { 0x74, 0x04, 0x33, 0xC0, 0x5E, 0xC3, 0x8B, 0x06, 0x5E, 0xC3, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC }
+                        new byte[] { 0x74, 0x04, 0x33, 0xC0, 0x5E, 0xC3, 0x8B, 0x06, 0x5E, 0xC3, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC }                       
                     };
                     break;
+
                 case Arch.x64:
 
-                    if (!isNewUnity)
+                    switch (Version)
                     {
-                        bytes = new byte[][] {
+                        case VersionID.V_18_2_Older:
+
+                            bytes = new byte[][] {
                             new byte[] { 0x75, 0x08, 0x33, 0xC0, 0x48, 0x83, 0xC4, 0x20, 0x5B, 0xC3, 0x8B, 0x03, 0x48, 0x83, 0xC4, 0x20, 0x5B, 0xC3 },
                             new byte[] { 0x74, 0x08, 0x33, 0xC0, 0x48, 0x83, 0xC4, 0x20, 0x5B, 0xC3, 0x8B, 0x03, 0x48, 0x83, 0xC4, 0x20, 0x5B, 0xC3 }
-                        };
-                    }
-                    else
-                    {
-                        bytes = new byte[][] {
+                            };
+                            break;
+
+                        case VersionID.V_18_3:
+
+                            bytes = new byte[][] {
                             new byte[] { 0x75, 0x08, 0x33, 0xC0, 0x48, 0x83, 0xC4, 0x30, 0x5B, 0xC3, 0x8B, 0x03, 0x48, 0x83, 0xC4, 0x30 },
                             new byte[] { 0x74, 0x08, 0x33, 0xC0, 0x48, 0x83, 0xC4, 0x30, 0x5B, 0xC3, 0x8B, 0x03, 0x48, 0x83, 0xC4, 0x30 }
-                        };
+                            };
+                            break;
+
+                        case VersionID.V_19_1:
+
+                            bytes = new byte[][] {
+                            new byte[] { 0x75, 0x04, 0x33, 0xC0, 0xEB, 0x02, 0x8B, 0x07 },
+                            new byte[] { 0x74, 0x04, 0x33, 0xC0, 0xEB, 0x02, 0x8B, 0x07 }
+                            };                            
+                            break;
                     }
                     break;
             }
@@ -315,6 +334,14 @@ namespace UnityDarkSkin
         {
             Dark,
             Light,
+        }
+
+
+        enum VersionID
+        {
+            V_18_2_Older,
+            V_18_3,
+            V_19_1
         }
     }
 }
