@@ -2,7 +2,7 @@
 This tool makes Dark Theme in Unity Editor and turns it back to white, if you wish. It's being useful for Unity Personal, where Dark Theme is disabled by default. <b>It's not a crack! It's simply changing a couple of bits in Editor.exe</b>
 
 ## Usage
-1. Compile it in Visual Studio and copy UnityDarkSkin.exe to folder where Unity.exe is located
+1. Compile it with Visual Studio and copy UnityDarkSkin.exe to folder where Unity.exe is located
 2. Run UnityDarkSkin.exe as administrator
 
 ## Supported versions
