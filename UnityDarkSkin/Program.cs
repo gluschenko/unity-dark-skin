@@ -8,13 +8,15 @@ namespace UnityDarkSkin
     {
         static SkinType Skin;
         static Arch SystemType;
-        static VersionID Version;
+        static UnityVersion Version;
 
         static string FilePath;
         static string FileName = "Unity.exe";
         static int BytePosition;
 
         static byte[][] bytes;
+        static byte LightByte;
+        static byte DarkByte;
 
         static void Main(string[] args)
         {
@@ -25,7 +27,7 @@ namespace UnityDarkSkin
 
         static void Init()
         {
-            Console.Title = "Unity Dark Skin v1.1";
+            Console.Title = "Unity Dark Skin v1.2";
             Console.WriteLine("Choose version:");
             Console.WriteLine("* Unity.exe (32 bit): type '1'");
             Console.WriteLine("* Unity.exe (64 bit): type '2'");
@@ -49,7 +51,7 @@ namespace UnityDarkSkin
             if (SystemType == Arch.x64)
             {
                 Console.WriteLine("Choose your Unity version:");
-                Console.WriteLine("* 5.0 to 2018.2: type '1'");
+                Console.WriteLine("* 5.0 - 2018.2: type '1'");
                 Console.WriteLine("* 2018.3: type '2'");
                 Console.WriteLine("* 2019.1: type '3'");
                 Console.Write("Your answer: ");
@@ -58,17 +60,15 @@ namespace UnityDarkSkin
                 switch (key.KeyChar)
                 {
                     case '1':
-                        Version = VersionID.V_18_2_Older;
+                        Version = UnityVersion._2018_2_AND_OLDER;
                         break;
                     case '2':
-                        Version = VersionID.V_18_3;
+                        Version = UnityVersion._2018_3;
                         break;
                     case '3':
-                        Version = VersionID.V_19_1;
-                        break;
                     default:
-                        throw new ArgumentException();
-
+                        Version = UnityVersion._2019_1;
+                        break;
                 }
             }
         }
@@ -89,27 +89,28 @@ namespace UnityDarkSkin
 
                     switch (Version)
                     {
-                        case VersionID.V_18_2_Older:
-
+                        case UnityVersion._2018_2_AND_OLDER:
+                            LightByte = 0x75;
+                            DarkByte = 0x74;
                             bytes = new byte[][] {
-                            new byte[] { 0x75, 0x08, 0x33, 0xC0, 0x48, 0x83, 0xC4, 0x20, 0x5B, 0xC3, 0x8B, 0x03, 0x48, 0x83, 0xC4, 0x20, 0x5B, 0xC3 },
-                            new byte[] { 0x74, 0x08, 0x33, 0xC0, 0x48, 0x83, 0xC4, 0x20, 0x5B, 0xC3, 0x8B, 0x03, 0x48, 0x83, 0xC4, 0x20, 0x5B, 0xC3 }
+                                new byte[] { 0x75, 0x08, 0x33, 0xC0, 0x48, 0x83, 0xC4, 0x20, 0x5B, 0xC3, 0x8B, 0x03, 0x48, 0x83, 0xC4, 0x20, 0x5B, 0xC3 },
+                                new byte[] { 0x74, 0x08, 0x33, 0xC0, 0x48, 0x83, 0xC4, 0x20, 0x5B, 0xC3, 0x8B, 0x03, 0x48, 0x83, 0xC4, 0x20, 0x5B, 0xC3 }
                             };
                             break;
-
-                        case VersionID.V_18_3:
-
+                        case UnityVersion._2018_3:
+                            LightByte = 0x75;
+                            DarkByte = 0x74;
                             bytes = new byte[][] {
-                            new byte[] { 0x75, 0x08, 0x33, 0xC0, 0x48, 0x83, 0xC4, 0x30, 0x5B, 0xC3, 0x8B, 0x03, 0x48, 0x83, 0xC4, 0x30 },
-                            new byte[] { 0x74, 0x08, 0x33, 0xC0, 0x48, 0x83, 0xC4, 0x30, 0x5B, 0xC3, 0x8B, 0x03, 0x48, 0x83, 0xC4, 0x30 }
+                                new byte[] { 0x75, 0x08, 0x33, 0xC0, 0x48, 0x83, 0xC4, 0x30, 0x5B, 0xC3, 0x8B, 0x03, 0x48, 0x83, 0xC4, 0x30 },
+                                new byte[] { 0x74, 0x08, 0x33, 0xC0, 0x48, 0x83, 0xC4, 0x30, 0x5B, 0xC3, 0x8B, 0x03, 0x48, 0x83, 0xC4, 0x30 }
                             };
                             break;
-
-                        case VersionID.V_19_1:
-
+                        case UnityVersion._2019_1:
+                            LightByte = 0x74;
+                            DarkByte = 0x75;
                             bytes = new byte[][] {
-                            new byte[] { 0x75, 0x04, 0x33, 0xC0, 0xEB, 0x02, 0x8B, 0x07 },
-                            new byte[] { 0x74, 0x04, 0x33, 0xC0, 0xEB, 0x02, 0x8B, 0x07 }
+                                new byte[] { 0x74, 0x04, 0x33, 0xC0, 0xEB, 0x02, 0x8B, 0x07 },
+                                new byte[] { 0x75, 0x04, 0x33, 0xC0, 0xEB, 0x02, 0x8B, 0x07 }
                             };                            
                             break;
                     }
@@ -140,13 +141,13 @@ namespace UnityDarkSkin
                         Console.WriteLine("--------");
                         Console.WriteLine("Please wait...");
 
-                        GetSkinType(BytePosition);
+                        GetSkin(BytePosition);
                         Console.WriteLine("Current skin: " + Skin.ToString());
 
                         Console.WriteLine("Please wait...");
                         ToggleSkinType();
 
-                        GetSkinType(BytePosition);
+                        GetSkin(BytePosition);
                         Console.WriteLine("Current skin: " + Skin.ToString());
                     }
                     else
@@ -173,7 +174,7 @@ namespace UnityDarkSkin
             Console.ReadKey();
         }
 
-        static void ChooseFolder()
+        /*static void ChooseFolder()
         {
             Console.WriteLine("\n--------");
             Console.WriteLine("Is Unity.exe with this .exe?");
@@ -196,22 +197,22 @@ namespace UnityDarkSkin
             }
             
             FilePath = UnityFolder + @"\" + FileName;
-        }
+        }*/
 
         static void ToggleSkinType()
         {
             switch (Skin)
             {
                 case SkinType.Light:
-                    ChangeSkin(SkinType.Dark);
+                    SetSkin(SkinType.Dark);
                     break;
                 case SkinType.Dark:
-                    ChangeSkin(SkinType.Light);
+                    SetSkin(SkinType.Light);
                     break;
             }
         }
 
-        static void ChangeSkin(SkinType skin)
+        static void SetSkin(SkinType skin)
         {
             switch (skin)
             {
@@ -238,20 +239,23 @@ namespace UnityDarkSkin
             }
         }
 
-        static void GetSkinType(int offset)
+        static void GetSkin(int offset)
         {
             using (BinaryReader binaryReader = new BinaryReader((Stream)File.OpenRead(FilePath)))
             {
                 binaryReader.BaseStream.Position = (long)offset;
-                switch (binaryReader.ReadByte())
+                byte themeByte = binaryReader.ReadByte();
+
+                if (themeByte == LightByte)
                 {
-                    case 0x75:
-                        Skin = SkinType.Light;
-                        break;
-                    case 0x74:
-                        Skin = SkinType.Dark;
-                        break;
+                    Skin = SkinType.Light;
                 }
+                else
+                if (themeByte == DarkByte)
+                {
+                    Skin = SkinType.Dark;
+                }
+
                 binaryReader.Close();
             }
         }
@@ -336,12 +340,11 @@ namespace UnityDarkSkin
             Light,
         }
 
-
-        enum VersionID
+        enum UnityVersion
         {
-            V_18_2_Older,
-            V_18_3,
-            V_19_1
+            _2018_2_AND_OLDER,
+            _2018_3,
+            _2019_1
         }
     }
 }
