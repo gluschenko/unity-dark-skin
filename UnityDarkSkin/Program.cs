@@ -4,8 +4,30 @@ using System.Linq;
 
 namespace UnityDarkSkin
 {
+    enum Arch
+    {
+        x86,
+        x64,
+    }
+
+    enum SkinType
+    {
+        Dark,
+        Light,
+    }
+
+    enum UnityVersion
+    {
+        _2018_2_AND_OLDER,
+        _2018_3,
+        _2019_1,
+        _2019_2,
+    }
+
     class Program
     {
+        const string AppVersion = "1.3";
+
         static SkinType Skin;
         static Arch SystemType;
         static UnityVersion Version;
@@ -27,7 +49,7 @@ namespace UnityDarkSkin
 
         static void Init()
         {
-            Console.Title = "Unity Dark Skin v1.2";
+            Console.Title = $"Unity Dark Skin v{AppVersion}";
             Console.WriteLine("Choose version:");
             Console.WriteLine("* Unity.exe (32 bit): type '1'");
             Console.WriteLine("* Unity.exe (64 bit): type '2'");
@@ -54,6 +76,7 @@ namespace UnityDarkSkin
                 Console.WriteLine("* 5.0 - 2018.2: type '1'");
                 Console.WriteLine("* 2018.3: type '2'");
                 Console.WriteLine("* 2019.1: type '3'");
+                Console.WriteLine("* 2019.2: type '4'");
                 Console.Write("Your answer: ");
 
                 key = Console.ReadKey();
@@ -66,8 +89,11 @@ namespace UnityDarkSkin
                         Version = UnityVersion._2018_3;
                         break;
                     case '3':
-                    default:
                         Version = UnityVersion._2019_1;
+                        break;
+                    case '4':
+                    default:
+                        Version = UnityVersion._2019_2;
                         break;
                 }
             }
@@ -112,6 +138,14 @@ namespace UnityDarkSkin
                                 new byte[] { 0x74, 0x04, 0x33, 0xC0, 0xEB, 0x02, 0x8B, 0x07 },
                                 new byte[] { 0x75, 0x04, 0x33, 0xC0, 0xEB, 0x02, 0x8B, 0x07 }
                             };                            
+                            break;
+                        case UnityVersion._2019_2:
+                            LightByte = 0x75;
+                            DarkByte = 0x74;
+                            bytes = new byte[][] {
+                                new byte[] { 0x75, 0x15, 0x33, 0xC0, 0xEB, 0x13, 0x90, 0x49 },
+                                new byte[] { 0x74, 0x15, 0x33, 0xC0, 0xEB, 0x13, 0x90, 0x49 }
+                            };
                             break;
                     }
                     break;
@@ -327,24 +361,5 @@ namespace UnityDarkSkin
         {
             return Enumerable.Range(0, hex.Length).Where(x => x % 2 == 0).Select((x) => Convert.ToByte(hex.Substring(x, 2), 16)).ToArray();
         }*/
-
-        enum Arch
-        {
-            x86,
-            x64,
-        }
-
-        enum SkinType
-        {
-            Dark,
-            Light,
-        }
-
-        enum UnityVersion
-        {
-            _2018_2_AND_OLDER,
-            _2018_3,
-            _2019_1
-        }
     }
 }

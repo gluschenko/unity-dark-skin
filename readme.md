@@ -9,6 +9,7 @@ This tool makes Dark Theme in Unity Editor and turns it back to white, if you wi
 * 5.0 to 2018.2 (tested on 5.3, 5.4, 2017.2, 2018.2)
 * 2018.3
 * 2019.1
+* 2019.2 (tested on 2019.2f1)
 
 ## How it works?
 
