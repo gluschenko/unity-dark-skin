@@ -20,6 +20,7 @@ namespace UnityDarkSkin
     {
         _2018_2_AND_OLDER,
         _2018_3,
+        _2018_4,
         _2019_1,
         _2019_2,
     }
@@ -75,8 +76,9 @@ namespace UnityDarkSkin
                 Console.WriteLine("Choose your Unity version:");
                 Console.WriteLine("* 5.0 - 2018.2: type '1'");
                 Console.WriteLine("* 2018.3: type '2'");
-                Console.WriteLine("* 2019.1: type '3'");
-                Console.WriteLine("* 2019.2: type '4'");
+                Console.WriteLine("* 2018.4: type '3'");
+                Console.WriteLine("* 2019.1: type '4'");
+                Console.WriteLine("* 2019.2: type '5'");
                 Console.Write("Your answer: ");
 
                 key = Console.ReadKey();
@@ -89,9 +91,12 @@ namespace UnityDarkSkin
                         Version = UnityVersion._2018_3;
                         break;
                     case '3':
-                        Version = UnityVersion._2019_1;
+                        Version = UnityVersion._2018_4;
                         break;
                     case '4':
+                        Version = UnityVersion._2019_1;
+                        break;
+                    case '5':
                     default:
                         Version = UnityVersion._2019_2;
                         break;
@@ -129,6 +134,15 @@ namespace UnityDarkSkin
                             bytes = new byte[][] {
                                 new byte[] { 0x75, 0x08, 0x33, 0xC0, 0x48, 0x83, 0xC4, 0x30, 0x5B, 0xC3, 0x8B, 0x03, 0x48, 0x83, 0xC4, 0x30 },
                                 new byte[] { 0x74, 0x08, 0x33, 0xC0, 0x48, 0x83, 0xC4, 0x30, 0x5B, 0xC3, 0x8B, 0x03, 0x48, 0x83, 0xC4, 0x30 }
+                            };
+                            break;
+                        // 000000014127606F  74 04 33 C0 EB 02 8B 03 48 8B 4C 24 58 48 33 CC  t.3Àë...H.L$XH3Ì  
+                        case UnityVersion._2018_4:
+                            LightByte = 0x74;
+                            DarkByte = 0x75;
+                            bytes = new byte[][] {
+                                new byte[] { 0x74, 0x04, 0x33, 0xC0, 0xEB, 0x02, 0x8B, 0x03, 0x48, 0x8B, 0x4C, 0x24, 0x58, 0x48 },
+                                new byte[] { 0x75, 0x04, 0x33, 0xC0, 0xEB, 0x02, 0x8B, 0x03, 0x48, 0x8B, 0x4C, 0x24, 0x58, 0x48 }
                             };
                             break;
                         case UnityVersion._2019_1:
@@ -207,31 +221,6 @@ namespace UnityDarkSkin
 
             Console.ReadKey();
         }
-
-        /*static void ChooseFolder()
-        {
-            Console.WriteLine("\n--------");
-            Console.WriteLine("Is Unity.exe with this .exe?");
-            Console.WriteLine("Unity.exe is here!: type 'y'");
-            Console.WriteLine("I'll choose my Unity.exe folder: type 'n'");
-            Console.Write("Your answer: ");
-
-            ConsoleKeyInfo key = Console.ReadKey();
-            string UnityFolder = "";
-            switch (key.KeyChar)
-            {
-                case 'n':
-                    Console.Write("\nEnter your file path: ");
-                    UnityFolder = Console.ReadLine();
-                    break;
-                case 'y':
-                default:
-                    UnityFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-                    break;
-            }
-            
-            FilePath = UnityFolder + @"\" + FileName;
-        }*/
 
         static void ToggleSkinType()
         {
@@ -355,11 +344,5 @@ namespace UnityDarkSkin
             }
             return num;
         }
-
-        // Hex string to array of bytes
-        /*static byte[] StringToByteArray(string hex)
-        {
-            return Enumerable.Range(0, hex.Length).Where(x => x % 2 == 0).Select((x) => Convert.ToByte(hex.Substring(x, 2), 16)).ToArray();
-        }*/
     }
 }
