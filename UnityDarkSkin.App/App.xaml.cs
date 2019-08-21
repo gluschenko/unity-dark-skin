@@ -8,10 +8,8 @@ using System.Windows;
 
 namespace UnityDarkSkin.App
 {
-    /// <summary>
-    /// Логика взаимодействия для App.xaml
-    /// </summary>
     public partial class App : Application
     {
+        
     }
 }

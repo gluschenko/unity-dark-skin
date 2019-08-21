@@ -5,8 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UnityDarkSkin.App"
         mc:Ignorable="d"
-        Title="MainWindow" Height="300" Width="300">
+        Title="Unity Dark Skin: GUI" Height="300" Width="300">
     <Grid>
-        <Button Width="50" Height="30" Content="ddd"></Button>
+        <Grid x:Name="StartScreen" Background="#333" Visibility="Collapsed">
+            <Button Content="OPEN"  Padding="16 8" HorizontalAlignment="Center" VerticalAlignment="Center" Click="OpenButton_Click"></Button>
+        </Grid>
+
+        <Grid x:Name="PatchScreen">
+            <StackPanel>
+                <Label>Editor directory path</Label>
+                <Grid Margin="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="220*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="DirectoryTextBox" Margin="0,0,45,0" Grid.ColumnSpan="2" MouseDoubleClick="ChooseDirectoryButton_Click"/>
+                    <Button x:Name="ChooseDirectoryButton" Style="{StaticResource LiteButtonStyle}" Content="🖊️"  Padding="8"  HorizontalAlignment="Right" Grid.Column="1" Click="ChooseDirectoryButton_Click"></Button>
+                </Grid>
+                <Label>Choose your version</Label>
+                <Grid Margin="4">
+                    <ComboBox x:Name="VersionsCombo"/>
+                </Grid>
+
+            </StackPanel>
+            
+            <Button Content="DO MAGIC!" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10"></Button>
+        </Grid>
+
     </Grid>
 </Window>
