@@ -27,7 +27,7 @@ namespace UnityDarkSkin.App
         private readonly string PrefsFile = "prefs.json"; // Relative path to preferances file
 
         private string StartPath = @"C:\Program Files\Unity";
-        private const string UnityName = "Unity.exe";
+        private const string EditorFileName = "Unity.exe";
 
         private Version CurrentVersion;
 
@@ -108,7 +108,7 @@ namespace UnityDarkSkin.App
 
             Freeze(true);
             ThreadHelper.Invoke(() => {
-                var files = IOHelper.SearchFile(path, UnityName);
+                var files = IOHelper.SearchFile(path, EditorFileName);
                 Dispatcher.Invoke(() => {
                     OnFilesFound(files);
                     Freeze(false);
@@ -118,7 +118,11 @@ namespace UnityDarkSkin.App
 
         private void OnFilesFound(string[] files)
         {
-            Alert(string.Join("\n", files));
+            //Alert(string.Join("\n", files));
+
+            FilesListWindow win = new FilesListWindow(this, files) { Owner = this };
+            win.Show();
+            win.Focus();
         }
 
         // Thumbs
@@ -151,10 +155,10 @@ namespace UnityDarkSkin.App
         }
 
         // Alert windows
-        public static void Alert(string text, string title = "Alert") => MessageBox.Show(text, title, MessageBoxButton.OK, MessageBoxImage.Information);
-        public static void Warning(string text, string title = "Warning") => MessageBox.Show(text, title, MessageBoxButton.OK, MessageBoxImage.Warning);
-        public static void Error(string text, string title = "Error") => MessageBox.Show(text, title, MessageBoxButton.OK, MessageBoxImage.Error);
+        public void Alert(string text, string title = "Alert") => MessageBox.Show(text, title, MessageBoxButton.OK, MessageBoxImage.Information);
+        public void Warning(string text, string title = "Warning") => MessageBox.Show(text, title, MessageBoxButton.OK, MessageBoxImage.Warning);
+        public void Error(string text, string title = "Error") => MessageBox.Show(text, title, MessageBoxButton.OK, MessageBoxImage.Error);
         // Safer exception throwing (useful for live debugging)
-        public static void ThrowException(Exception exception) => Error(exception.ToString(), exception.GetType().Name);
+        public void ThrowException(Exception exception) => Error(exception.ToString(), exception.GetType().Name);
     }
 }

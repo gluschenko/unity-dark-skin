@@ -5,8 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UnityDarkSkin.App"
         mc:Ignorable="d"
-        Title="Files List" Height="400" Width="400">
+        Title="Search result" Height="300" Width="400" WindowStyle="ToolWindow">
     <Grid>
-        
+        <Label>Choose file you need:</Label>
+        <ScrollViewer Margin="0,30,0,0">
+            <StackPanel x:Name="FilesList">
+                <ComboBoxItem>Lorem ipsum 0</ComboBoxItem>
+                <ComboBoxItem>Lorem ipsum 1</ComboBoxItem>
+                <ComboBoxItem>Lorem ipsum 2</ComboBoxItem>
+                <ComboBoxItem>Lorem ipsum 3</ComboBoxItem>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Window>

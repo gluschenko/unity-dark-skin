@@ -66,6 +66,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="FilesListWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -79,6 +83,9 @@
     <Compile Include="Core\IOHelper.cs" />
     <Compile Include="Core\JsonUtility.cs" />
     <Compile Include="Core\ThreadHelper.cs" />
+    <Compile Include="FilesListWindow.xaml.cs">
+      <DependentUpon>FilesListWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
