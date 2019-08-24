@@ -29,7 +29,7 @@ namespace UnityDarkSkin.App
         private string StartPath = @"C:\Program Files\Unity";
         private const string EditorFileName = "Unity.exe";
 
-        private Version CurrentVersion;
+        private Patcher Patcher;
 
         public enum Section
         {
@@ -52,19 +52,15 @@ namespace UnityDarkSkin.App
 
             DirectoryTextBox.PreviewMouseDoubleClick += (sender, args) => ChooseDirectoryButton_Click(sender, null);
 
+            // Versions combo box
             foreach (var version in Versions.Get())
             {
                 VersionsCombo.Items.Add(version);
             }
-
-            VersionsCombo.SelectionChanged += (sender, args) => {
-                CurrentVersion = (Version)VersionsCombo.SelectedItem;
-                Alert(CurrentVersion.ToString());
-            };
+            VersionsCombo.SelectionChanged += VersionsCombo_SelectionChanged;
 
             // Resets thumbs by default
-            ToggleThumb(LightTheme, false);
-            ToggleThumb(DarkTheme, false);
+            SetThemeThumbs(ThemeType.None);
         }
 
         // Load & Save methods
@@ -99,6 +95,20 @@ namespace UnityDarkSkin.App
             IOHelper.OpenFolderDialog(DirectoryTextBox.Text, OnFolderChosen);
         }
 
+        private void VersionsCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Patcher != null)
+            {
+                var version = (Version)VersionsCombo.SelectedItem;
+                if (Patcher.CurrentVersion != version)
+                {
+                    Patcher.CurrentVersion = version;
+                    Patcher.Reset();
+                    OnVersionDetected();
+                }
+            }
+        }
+
         // Async callbacks
         private void OnFolderChosen(string path)
         {
@@ -110,8 +120,8 @@ namespace UnityDarkSkin.App
             ThreadHelper.Invoke(() => {
                 var files = IOHelper.SearchFile(path, EditorFileName);
                 Dispatcher.Invoke(() => {
-                    OnFilesFound(files);
                     Freeze(false);
+                    OnFilesFound(files);
                 });
             });
         }
@@ -120,15 +130,87 @@ namespace UnityDarkSkin.App
         {
             //Alert(string.Join("\n", files));
 
-            FilesListWindow win = new FilesListWindow(this, files) { Owner = this };
-            win.Show();
-            win.Focus();
+            if (files.Length > 0)
+            {
+                FilesListWindow win = new FilesListWindow(this, files, OnSelectFile) { Owner = this };
+                win.Show();
+                win.Focus();
+            }
+            else
+            {
+                Error($"There is no {EditorFileName}. Try choose another folder");
+            }
+        }
+
+        private void OnSelectFile(string file)
+        {
+            Patcher = null;
+            GC.Collect();
+            //
+            Patcher = new Patcher(file);
+
+            Freeze(true);
+            ThreadHelper.Invoke(() => {
+                Patcher.Load();
+                Dispatcher.Invoke(() => {
+                    Freeze(false);
+                    OnFileLoaded();
+                });
+            });
+        }
+
+        private void OnFileLoaded()
+        {
+            Freeze(true);
+            ThreadHelper.Invoke(() => {
+                Version version = Patcher.DetectVersion();
+
+                Dispatcher.Invoke(() => {
+                    Freeze(false);
+
+                    if (version != null)
+                    {
+                        VersionsCombo.SelectedItem = version;
+                        OnVersionDetected();
+                    }
+                    else
+                    {
+                        Error("This version is not supported. Try another version of Unity");
+                    }
+                });
+            });
+        }
+
+        private void OnVersionDetected()
+        {
+            Freeze(true);
+            ThreadHelper.Invoke(() => {
+                ThemeType theme = ThemeType.None;
+
+                if (Patcher?.CurrentVersion != null)
+                    theme = Patcher.DetectTheme(Patcher.CurrentVersion);
+
+                Dispatcher.Invoke(() => {
+                    Freeze(false);
+                    SetThemeThumbs(theme);
+                    if (theme == ThemeType.None)
+                    {
+                        Error("Could not find signature");
+                    }
+                });
+            });
         }
 
         // Thumbs
         public void ToggleThumb(Label thumb, bool state)
         {
-            thumb.Style = Application.Current.FindResource(state ? "ThemeThumbSelected" : "ThemeThumb") as Style;
+            thumb.Style = (Style)Application.Current.FindResource(state ? "ThemeThumbSelected" : "ThemeThumb");
+        }
+
+        public void SetThemeThumbs(ThemeType skin)
+        {
+            ToggleThumb(LightTheme, skin == ThemeType.Light);
+            ToggleThumb(DarkTheme, skin == ThemeType.Dark);
         }
 
         // Sections behaviour
@@ -140,7 +222,11 @@ namespace UnityDarkSkin.App
 
         public void Freeze(bool state)
         {
-            if (state)
+            ProcessingScreen.Visibility = state ? Visibility.Visible : Visibility.Hidden;
+            PatchScreen.IsEnabled = !state;
+            PatchScreen.Effect = state ? new BlurEffect() { Radius = 10, KernelType = KernelType.Gaussian } : null;
+
+            /*if (state)
             {
                 ProcessingScreen.Visibility = Visibility.Visible;
                 PatchScreen.IsEnabled = false;
@@ -151,7 +237,7 @@ namespace UnityDarkSkin.App
                 ProcessingScreen.Visibility = Visibility.Hidden;
                 PatchScreen.IsEnabled = true;
                 PatchScreen.Effect = null;
-            }
+            }*/
         }
 
         // Alert windows

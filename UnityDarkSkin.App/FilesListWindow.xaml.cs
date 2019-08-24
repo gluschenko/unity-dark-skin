@@ -17,7 +17,7 @@ namespace UnityDarkSkin.App
 {
     public partial class FilesListWindow : Window
     {
-        public FilesListWindow(MainWindow Main, string[] files)
+        public FilesListWindow(MainWindow Main, string[] files, Action<string> onSelect)
         {
             InitializeComponent();
 
@@ -26,7 +26,8 @@ namespace UnityDarkSkin.App
             {
                 ComboBoxItem item = new ComboBoxItem() { Content = file, ToolTip = file };
                 item.MouseDoubleClick += (sender, args) => {
-                    Main.Alert(file);
+                    onSelect?.Invoke(file);
+                    //
                     Close();
                     Main.Focus();
                 };

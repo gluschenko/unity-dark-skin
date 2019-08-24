@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="Search result" Height="300" Width="400" WindowStyle="ToolWindow">
     <Grid>
-        <Label>Choose file you need:</Label>
-        <ScrollViewer Margin="0,30,0,0">
+        <Label FontSize="16">Choose a needed file [double click]:</Label>
+        <ScrollViewer Margin="0,32,0,0">
             <StackPanel x:Name="FilesList">
                 <ComboBoxItem>Lorem ipsum 0</ComboBoxItem>
                 <ComboBoxItem>Lorem ipsum 1</ComboBoxItem>

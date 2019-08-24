@@ -10,24 +10,19 @@ namespace UnityDarkSkin.App.Core
 {
     public class IOHelper
     {
-        public static void OpenFolderDialog(string path, Action<string> onDone = null, Action onCancel = null)
+        public static void OpenFolderDialog(string initialDirectory, Action<string> onDone = null, Action onCancel = null)
         {
             var dialog = new CommonOpenFileDialog
             {
                 IsFolderPicker = true,
-                InitialDirectory = path,
+                InitialDirectory = initialDirectory
             };
-
             OpenDialog(dialog, onDone, onCancel);
         }
 
-        public static void OpenFileDialog(string path, Action<string> onDone = null, Action onCancel = null)
+        public static void OpenFileDialog(string initialDirectory, Action<string> onDone = null, Action onCancel = null)
         {
-            var dialog = new CommonOpenFileDialog
-            {
-                InitialDirectory = path,
-            };
-
+            var dialog = new CommonOpenFileDialog { InitialDirectory = initialDirectory };
             OpenDialog(dialog, onDone, onCancel);
         }
 

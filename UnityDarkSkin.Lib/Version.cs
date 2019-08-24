@@ -6,17 +6,22 @@ using System.Threading.Tasks;
 
 namespace UnityDarkSkin.Lib
 {
-    public struct Version
+    public class Version
     {
-        public string Name { get; set; }
-        public byte[] LightBytes { get; set; }
-        public byte[] DarkBytes { get; set; }
+        public readonly string Name;
+        public readonly byte[] LightBytes;
+        public readonly byte[] DarkBytes;
 
         public Version(string name, byte[] lightBytes, byte[] darkBytes)
         {
             Name = name;
             LightBytes = lightBytes;
             DarkBytes = darkBytes;
+        }
+
+        public byte[] GetBytes(ThemeType skin)
+        {
+            return skin == ThemeType.Light ? LightBytes : DarkBytes;
         }
 
         public override string ToString()
