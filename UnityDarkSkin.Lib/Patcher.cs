@@ -7,6 +7,9 @@ namespace UnityDarkSkin.Lib
 {
     public class Patcher
     {
+        public void Patch()
+        {
 
+        }
     }
 }

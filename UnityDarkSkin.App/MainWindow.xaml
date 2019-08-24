@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:UnityDarkSkin.App"
         mc:Ignorable="d"
         Title="Unity Dark Skin: GUI" Height="300" Width="300">
+
     <Grid>
-        <Grid x:Name="StartScreen" Background="#333" Visibility="Collapsed">
+        <Grid x:Name="StartScreen" Background="#333" Visibility="Hidden">
             <Button Content="OPEN"  Padding="16 8" HorizontalAlignment="Center" VerticalAlignment="Center" Click="OpenButton_Click"></Button>
         </Grid>
 
@@ -24,12 +25,22 @@
                 </Grid>
                 <Label>Choose your version</Label>
                 <Grid Margin="4">
-                    <ComboBox x:Name="VersionsCombo"/>
+                    <ComboBox x:Name="VersionsCombo" Text="ddd"/>
                 </Grid>
-
+                <Label>Current theme</Label>
+                <StackPanel Orientation="Horizontal">
+                    <Label x:Name="LightTheme" Style="{StaticResource ThemeThumbSelected}" Background="#aaa" Margin="5"></Label>
+                    <Label x:Name="DarkTheme" Style="{StaticResource ThemeThumb}" Background="#222" Margin="5"></Label>
+                </StackPanel>
             </StackPanel>
-            
-            <Button Content="DO MAGIC!" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10"></Button>
+
+            <ProgressBar Height="5" Foreground="#FF0000" VerticalAlignment="Bottom" Maximum="1" Value="1"></ProgressBar>
+
+            <Button Content="DO IT!" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10"></Button>
+        </Grid>
+
+        <Grid x:Name="ProcessingScreen" Background="#CC222222" Visibility="Hidden">
+            <Label Foreground="#fff" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center">Processing...</Label>
         </Grid>
 
     </Grid>

@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -23,6 +24,7 @@ namespace UnityDarkSkin.App
         // Internal preferances management
         public ApplicationData Data { get; private set; } // Contains current application state (e.g. window size)
         public DataManager<ApplicationData> Manager { get; private set; } // Сontrols data loading
+        private readonly string PrefsFile = "prefs.json"; // Relative path to preferances file
 
         private string StartPath = @"C:\Program Files\Unity";
         private const string UnityName = "Unity.exe";
@@ -40,27 +42,29 @@ namespace UnityDarkSkin.App
             InitializeComponent();
 
             // Application data management
-            Manager = new DataManager<ApplicationData>("prefs.json");
+            Manager = new DataManager<ApplicationData>(PrefsFile);
             LoadData();
             Closed += (sender, args) => SaveData();
 
             //
-
             Navigate(Section.StartScreen);
-
             //
 
-            DirectoryTextBox.MouseDoubleClick += (sender, args) => ChooseDirectoryButton_Click(sender, null);
+            DirectoryTextBox.PreviewMouseDoubleClick += (sender, args) => ChooseDirectoryButton_Click(sender, null);
 
             foreach (var version in Versions.Get())
             {
                 VersionsCombo.Items.Add(version);
             }
 
-            VersionsCombo.SelectionChanged += (s, a) => {
+            VersionsCombo.SelectionChanged += (sender, args) => {
                 CurrentVersion = (Version)VersionsCombo.SelectedItem;
                 Alert(CurrentVersion.ToString());
             };
+
+            // Resets thumbs by default
+            ToggleThumb(LightTheme, false);
+            ToggleThumb(DarkTheme, false);
         }
 
         // Load & Save methods
@@ -87,30 +91,63 @@ namespace UnityDarkSkin.App
 
         private void OpenButton_Click(object sender, RoutedEventArgs e)
         {
-            IOHelper.OpenFolderDialog(StartPath, (path) => {
-                Navigate(Section.PatchScreen);
-                DirectoryTextBox.Text = path;
-            });
-        }
-
-        private void BackButton_Click(object sender, RoutedEventArgs e)
-        {
-            Navigate(Section.StartScreen);
+            IOHelper.OpenFolderDialog(StartPath, OnFolderChosen);
         }
 
         private void ChooseDirectoryButton_Click(object sender, RoutedEventArgs e)
         {
-            IOHelper.OpenFolderDialog(DirectoryTextBox.Text, (path) => {
-                DirectoryTextBox.Text = path;
+            IOHelper.OpenFolderDialog(DirectoryTextBox.Text, OnFolderChosen);
+        }
+
+        // Async callbacks
+        private void OnFolderChosen(string path)
+        {
+            Navigate(Section.PatchScreen);
+
+            DirectoryTextBox.Text = path;
+
+            Freeze(true);
+            ThreadHelper.Invoke(() => {
+                var files = IOHelper.SearchFile(path, UnityName);
+                Dispatcher.Invoke(() => {
+                    OnFilesFound(files);
+                    Freeze(false);
+                });
             });
         }
 
+        private void OnFilesFound(string[] files)
+        {
+            Alert(string.Join("\n", files));
+        }
+
+        // Thumbs
+        public void ToggleThumb(Label thumb, bool state)
+        {
+            thumb.Style = Application.Current.FindResource(state ? "ThemeThumbSelected" : "ThemeThumb") as Style;
+        }
 
         // Sections behaviour
         public void Navigate(Section section)
         {
             StartScreen.Visibility = section == Section.StartScreen ? Visibility.Visible : Visibility.Hidden;
             PatchScreen.Visibility = section == Section.PatchScreen ? Visibility.Visible : Visibility.Hidden;
+        }
+
+        public void Freeze(bool state)
+        {
+            if (state)
+            {
+                ProcessingScreen.Visibility = Visibility.Visible;
+                PatchScreen.IsEnabled = false;
+                PatchScreen.Effect = new BlurEffect() { Radius = 10, KernelType = KernelType.Gaussian };
+            }
+            else
+            {
+                ProcessingScreen.Visibility = Visibility.Hidden;
+                PatchScreen.IsEnabled = true;
+                PatchScreen.Effect = null;
+            }
         }
 
         // Alert windows
