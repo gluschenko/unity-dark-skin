@@ -33,9 +33,27 @@ namespace UnityDarkSkin.Lib
             Data = File.ReadAllBytes(FilePath);
         }
 
-        public void Patch()
+        public ThemeType SetTheme(ThemeType theme)
         {
+            if (!File.Exists(FilePath))
+                throw new FileNotFoundException("File doesn't exist");
 
+            if (CurrentVersion == null)
+                throw new InvalidOperationException("Version is not detected");
+
+            if (offset == 0)
+                DetectTheme(CurrentVersion);
+
+            var bytes = CurrentVersion.GetBytes(theme);
+            if (offset + bytes.Length < Data.Length)
+            {
+                for (int i = 0; i < bytes.Length; ++i)
+                {
+                    Data[offset + i] = bytes[i];
+                }
+            }
+
+            return DetectTheme(CurrentVersion);
         }
 
         // Search in bytes: O(N)
@@ -121,6 +139,14 @@ namespace UnityDarkSkin.Lib
             return CurrentTheme;
         }
 
+        public void Save()
+        {
+            if (!IsLoaded)
+                throw new InvalidOperationException("File is not loaded");
+
+            File.WriteAllBytes(FilePath, Data);
+        }
+
         public void MakeBackup()
         {
             if (!IsLoaded)
@@ -130,10 +156,18 @@ namespace UnityDarkSkin.Lib
             string FileName = Path.GetFileName(FilePath);
 
             DateTime date = DateTime.Now;
-            string NewFileName = $"Backup_{date.Day}-{date.Month}-{date.Year}_{date.Hour}_{date.Minute}_{date.Second}_{FileName}";
+            string NewFileName = $"Backup_{date.Day}-{date.Month}-{date.Year}_{date.Hour}:{date.Minute}:{date.Second}_{FileName}";
             string NewPath = Path.Combine(FileDir, NewFileName);
 
             File.WriteAllBytes(NewPath, Data);
+        }
+
+        public void RestoreBackup(string file)
+        {
+            if (!IsLoaded)
+                throw new InvalidOperationException("File is not loaded");
+
+            throw new NotImplementedException();
         }
     }
 

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UnityDarkSkin.App"
         mc:Ignorable="d"
-        Title="Unity Dark Skin: GUI" Height="300" Width="300">
+        Title="Unity Dark Skin: GUI" MinHeight="370" MinWidth="300" Height="300" Width="300">
 
     <Grid>
         <Grid x:Name="StartScreen" Background="#333" Visibility="Hidden">
@@ -32,15 +32,19 @@
                     <Label x:Name="LightTheme" Style="{StaticResource ThemeThumbSelected}" Background="#aaa" Margin="5"></Label>
                     <Label x:Name="DarkTheme" Style="{StaticResource ThemeThumb}" Background="#222" Margin="5"></Label>
                 </StackPanel>
+                <Label>Backup</Label>
+                <Grid Margin="4">
+                    <Button HorizontalAlignment="Left" Style="{StaticResource LiteButtonStyle}" Click="MakeBackupButton_Click">Make backup</Button>
+                    <Button HorizontalAlignment="Right" Style="{StaticResource RedButtonStyle}" Click="RestoreBackupButton_Click">Restore</Button>
+                </Grid>
             </StackPanel>
 
-            <ProgressBar Height="5" Foreground="#FF0000" VerticalAlignment="Bottom" Maximum="1" Value="1"></ProgressBar>
-
-            <Button Content="DO IT!" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10"></Button>
+            <Button Content="SWITCH THEME" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10" Click="SwitchThemeButton_Click"></Button>
         </Grid>
 
         <Grid x:Name="ProcessingScreen" Background="#CC222222" Visibility="Hidden">
-            <Label Foreground="#fff" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center">Processing...</Label>
+            <Label x:Name="ProcessState" Foreground="#fff" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center">Processing...</Label>
+            <ProgressBar x:Name="ProgessBar" Height="3" Margin="30 60" Foreground="#f50" Background="#fff" BorderThickness="0" VerticalAlignment="Bottom" Visibility="Hidden" Maximum="1" Value="0.4"></ProgressBar>
         </Grid>
 
     </Grid>

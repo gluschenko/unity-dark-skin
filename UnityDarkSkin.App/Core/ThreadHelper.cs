@@ -32,8 +32,11 @@ namespace UnityDarkSkin.App.Core
 
         public static void Invoke(Action action)
         {
-            Init();
-            actions.Enqueue(action);
+            if (action != null)
+            {
+                Init();
+                actions.Enqueue(action);
+            }
         }
     }
 }

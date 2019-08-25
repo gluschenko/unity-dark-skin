@@ -43,14 +43,14 @@ namespace UnityDarkSkin.App.Core
 
         //
 
-        public static string[] SearchFile(string directory, string file_name, bool recursive = true)
+        public static string[] SearchFile(string directory, string file_name, bool recursive = true, bool contains_name = false)
         {
             List<string> files = new List<string>();
-            InternalSearchFile(ref files, directory, file_name, recursive);
+            InternalSearchFile(ref files, directory, file_name, recursive, contains_name);
             return files.ToArray();
         }
 
-        private static void InternalSearchFile(ref List<string> files, string directory, string file_name, bool recursive)
+        private static void InternalSearchFile(ref List<string> files, string directory, string file_name, bool recursive, bool contains_name)
         {
             if (Directory.Exists(directory))
             {
@@ -61,7 +61,13 @@ namespace UnityDarkSkin.App.Core
                 {
                     sub_dirs = Directory.GetDirectories(directory);
                     //
-                    matchingFiles = Directory.GetFiles(directory).Where(p => Path.GetFileName(p).Equals(file_name)).ToArray();
+                    Func<string, bool> search;
+                    if (contains_name)
+                        search = (p) => Path.GetFileName(p).Contains(file_name);
+                    else
+                        search = (p) => Path.GetFileName(p).Equals(file_name);
+
+                    matchingFiles = Directory.GetFiles(directory).Where(search).ToArray();
                     files.AddRange(matchingFiles);
                 }
                 catch {
@@ -72,7 +78,7 @@ namespace UnityDarkSkin.App.Core
                 foreach (string dir in sub_dirs)
                 {
                     if(recursive)
-                        InternalSearchFile(ref files, dir, file_name, recursive);
+                        InternalSearchFile(ref files, dir, file_name, recursive, contains_name);
                 }
             }
         }

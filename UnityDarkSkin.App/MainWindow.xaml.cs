@@ -109,6 +109,81 @@ namespace UnityDarkSkin.App
             }
         }
 
+        private void SwitchThemeButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (Patcher != null)
+            {
+                Freeze(true);
+                ThreadHelper.Invoke(() => {
+                    ThemeType newTheme = Patcher.CurrentTheme == ThemeType.Light ? ThemeType.Dark : ThemeType.Light;
+                    ThemeType theme = Patcher.SetTheme(newTheme);
+
+                    if (newTheme == theme)
+                    {
+                        try
+                        {
+                            Patcher.Save();
+                        }
+                        catch (Exception ex)
+                        {
+                            Error($"Could not to save {EditorFileName}! Check access permissions.\n\nDetails:\n\n{ex}");
+                        }
+                    }
+                    else
+                    {
+                        Error("Could not to switch theme");
+                    }
+
+                    Dispatcher.Invoke(() => {
+                        Freeze(false);
+                        SetThemeThumbs(theme);
+                    });
+                });
+            }
+        }
+
+        private void MakeBackupButton_Click(object sender, RoutedEventArgs e)
+        {
+            Freeze(true);
+            ThreadHelper.Invoke(() => {
+                try
+                {
+                    Patcher?.MakeBackup();
+                }
+                catch (Exception ex)
+                {
+                    ThrowException(ex);
+                }
+
+                Dispatcher.Invoke(() => {
+                    Freeze(false);
+                });
+            });
+        }
+
+        private void RestoreBackupButton_Click(object sender, RoutedEventArgs e)
+        {
+            string path = DirectoryTextBox.Text;
+
+            Freeze(true);
+            ThreadHelper.Invoke(() => {
+
+                var files = new string[0];
+                try
+                {
+                    files = IOHelper.SearchFile(path, "Backup_", true, true);
+                }
+                catch(Exception ex) {
+                    ThrowException(ex);
+                }
+
+                Dispatcher.Invoke(() => {
+                    Freeze(false);
+                    OnBackupFilesFound(files);
+                });
+            });
+        }
+
         // Async callbacks
         private void OnFolderChosen(string path)
         {
@@ -201,6 +276,20 @@ namespace UnityDarkSkin.App
             });
         }
 
+        private void OnBackupFilesFound(string[] files)
+        {
+            if (files.Length > 0)
+            {
+                FilesListWindow win = new FilesListWindow(this, files, Patcher.RestoreBackup) { Owner = this };
+                win.Show();
+                win.Focus();
+            }
+            else
+            {
+                Error($"There is no backup files. Make a first backup!");
+            }
+        }
+
         // Thumbs
         public void ToggleThumb(Label thumb, bool state)
         {
@@ -244,7 +333,7 @@ namespace UnityDarkSkin.App
         public void Alert(string text, string title = "Alert") => MessageBox.Show(text, title, MessageBoxButton.OK, MessageBoxImage.Information);
         public void Warning(string text, string title = "Warning") => MessageBox.Show(text, title, MessageBoxButton.OK, MessageBoxImage.Warning);
         public void Error(string text, string title = "Error") => MessageBox.Show(text, title, MessageBoxButton.OK, MessageBoxImage.Error);
-        // Safer exception throwing (useful for live debugging)
+        // Safer exception throwing (useful for live debugging OR I AM CODE MONKEY)
         public void ThrowException(Exception exception) => Error(exception.ToString(), exception.GetType().Name);
     }
 }
