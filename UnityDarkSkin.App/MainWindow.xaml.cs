@@ -113,7 +113,7 @@ namespace UnityDarkSkin.App
         {
             if (Patcher != null)
             {
-                Freeze(true);
+                Freeze("Switching theme...");
                 ThreadHelper.Invoke(() => {
                     ThemeType newTheme = Patcher.CurrentTheme == ThemeType.Light ? ThemeType.Dark : ThemeType.Light;
                     ThemeType theme = Patcher.SetTheme(newTheme);
@@ -144,7 +144,7 @@ namespace UnityDarkSkin.App
 
         private void MakeBackupButton_Click(object sender, RoutedEventArgs e)
         {
-            Freeze(true);
+            Freeze("Making a new backup...");
             ThreadHelper.Invoke(() => {
                 try
                 {
@@ -165,7 +165,7 @@ namespace UnityDarkSkin.App
         {
             string path = DirectoryTextBox.Text;
 
-            Freeze(true);
+            Freeze("Searching backups...");
             ThreadHelper.Invoke(() => {
 
                 var files = new string[0];
@@ -191,7 +191,7 @@ namespace UnityDarkSkin.App
 
             DirectoryTextBox.Text = path;
 
-            Freeze(true);
+            Freeze("Searching files...");
             ThreadHelper.Invoke(() => {
                 var files = IOHelper.SearchFile(path, EditorFileName);
                 Dispatcher.Invoke(() => {
@@ -207,9 +207,11 @@ namespace UnityDarkSkin.App
 
             if (files.Length > 0)
             {
+                Freeze("Choose a file in another window");
                 FilesListWindow win = new FilesListWindow(this, files, OnSelectFile) { Owner = this };
                 win.Show();
                 win.Focus();
+                win.Closed += (s, e) => Freeze(false);
             }
             else
             {
@@ -224,7 +226,7 @@ namespace UnityDarkSkin.App
             //
             Patcher = new Patcher(file);
 
-            Freeze(true);
+            Freeze("Loading...");
             ThreadHelper.Invoke(() => {
                 Patcher.Load();
                 Dispatcher.Invoke(() => {
@@ -236,7 +238,7 @@ namespace UnityDarkSkin.App
 
         private void OnFileLoaded()
         {
-            Freeze(true);
+            Freeze("Detecting version...");
             ThreadHelper.Invoke(() => {
                 Version version = Patcher.DetectVersion();
 
@@ -258,7 +260,7 @@ namespace UnityDarkSkin.App
 
         private void OnVersionDetected()
         {
-            Freeze(true);
+            Freeze("Detecting theme...");
             ThreadHelper.Invoke(() => {
                 ThemeType theme = ThemeType.None;
 
@@ -280,9 +282,11 @@ namespace UnityDarkSkin.App
         {
             if (files.Length > 0)
             {
+                Freeze("Choose a file in another window");
                 FilesListWindow win = new FilesListWindow(this, files, Patcher.RestoreBackup) { Owner = this };
                 win.Show();
                 win.Focus();
+                win.Closed += (s, e) => Freeze(false);
             }
             else
             {
@@ -311,6 +315,7 @@ namespace UnityDarkSkin.App
 
         public void Freeze(bool state)
         {
+            ProcessState.Content = "Processing...";
             ProcessingScreen.Visibility = state ? Visibility.Visible : Visibility.Hidden;
             PatchScreen.IsEnabled = !state;
             PatchScreen.Effect = state ? new BlurEffect() { Radius = 10, KernelType = KernelType.Gaussian } : null;
@@ -327,6 +332,12 @@ namespace UnityDarkSkin.App
                 PatchScreen.IsEnabled = true;
                 PatchScreen.Effect = null;
             }*/
+        }
+
+        public void Freeze(string text)
+        {
+            Freeze(true);
+            ProcessState.Content = text;
         }
 
         // Alert windows
