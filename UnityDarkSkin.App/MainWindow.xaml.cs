@@ -163,19 +163,11 @@ namespace UnityDarkSkin.App
 
         private void RestoreBackupButton_Click(object sender, RoutedEventArgs e)
         {
-            string path = DirectoryTextBox.Text;
+            string path = System.IO.Path.GetDirectoryName(Patcher.FilePath);
 
             Freeze("Searching backups...");
             ThreadHelper.Invoke(() => {
-
-                var files = new string[0];
-                try
-                {
-                    files = IOHelper.SearchFile(path, "Backup_", true, true);
-                }
-                catch(Exception ex) {
-                    ThrowException(ex);
-                }
+                var files = IOHelper.SearchFile(path, "Backup_", true, true);
 
                 Dispatcher.Invoke(() => {
                     Freeze(false);
@@ -283,7 +275,7 @@ namespace UnityDarkSkin.App
             if (files.Length > 0)
             {
                 Freeze("Choose a file in another window");
-                FilesListWindow win = new FilesListWindow(this, files, Patcher.RestoreBackup) { Owner = this };
+                FilesListWindow win = new FilesListWindow(this, files, RestoreBackup) { Owner = this };
                 win.Show();
                 win.Focus();
                 win.Closed += (s, e) => Freeze(false);
@@ -291,6 +283,19 @@ namespace UnityDarkSkin.App
             else
             {
                 Error($"There is no backup files. Make a first backup!");
+            }
+
+            void RestoreBackup(string path)
+            {
+                try
+                {
+                    Patcher.RestoreBackup(path);
+                    OnSelectFile(Patcher.FilePath);
+                }
+                catch (Exception ex)
+                {
+                    ThrowException(ex);
+                }
             }
         }
 

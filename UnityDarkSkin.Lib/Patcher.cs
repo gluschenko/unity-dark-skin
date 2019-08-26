@@ -167,7 +167,10 @@ namespace UnityDarkSkin.Lib
             if (!IsLoaded)
                 throw new InvalidOperationException("File is not loaded");
 
-            throw new NotImplementedException();
+            File.Delete(FilePath);
+            File.Move(file, FilePath);
+
+            //throw new NotImplementedException();
         }
     }
 
