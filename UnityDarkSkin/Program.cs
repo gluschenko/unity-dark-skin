@@ -1,34 +1,33 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using UnityDarkSkin.Lib;
 
 namespace UnityDarkSkin
 {
-    enum Arch
-    {
-        x86,
-        x64,
-    }
-
-    enum SkinType
-    {
-        Dark,
-        Light,
-    }
-
-    enum UnityVersion
-    {
-        _2018_2_AND_OLDER,
-        _2018_3,
-        _2018_4,
-        _2019_1,
-        _2019_2,
-    }
-
     class Program
     {
-        const string AppVersion = "1.3";
+        public const string AppVersion = "1.4";
+        public static ConsoleApp App;
 
+        static void Main(string[] args)
+        {
+            Console.Title = $"Unity Dark Skin: Console v{AppVersion}";
+
+            App = new ConsoleApp();
+            App.Run();
+
+            Console.WriteLine("Press any key to exit...");
+            Console.ReadKey();
+
+            //Init();
+            //Setup();
+            //Start();
+        }
+
+        /*
+         *  LEGACY CODE!!! All this code has been moved to UnityDarkSkin.Lib - universal tool for Console and WPF apps
+         * 
         static SkinType Skin;
         static Arch SystemType;
         static UnityVersion Version;
@@ -41,11 +40,25 @@ namespace UnityDarkSkin
         static byte LightByte;
         static byte DarkByte;
 
-        static void Main(string[] args)
+        enum Arch
         {
-            Init();
-            Setup();
-            Start();
+            x86,
+            x64,
+        }
+
+        enum SkinType
+        {
+            Dark,
+            Light,
+        }
+
+        enum UnityVersion
+        {
+            _2018_2_AND_OLDER,
+            _2018_3,
+            _2018_4,
+            _2019_1,
+            _2019_2,
         }
 
         static void Init()
@@ -343,6 +356,6 @@ namespace UnityDarkSkin
                 }
             }
             return num;
-        }
+        }*/
     }
 }
