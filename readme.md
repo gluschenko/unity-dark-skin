@@ -11,10 +11,10 @@ This tool makes Dark Theme in Unity Editor and turns it back to white, if you wi
 
 | UnityDarkSkin.App | UnityDarkSkin |
 | --- | --- |
-| ![Default theme](Media/gui_1.jpg) | ![Dark theme](Media/console_1.jpg) |
-| ![Default theme](Media/gui_2.jpg) |  |
-| ![Default theme](Media/gui_3.jpg) |  |
-| ![Default theme](Media/gui_4.jpg) |  |
+| ![Default theme](Media/gui_1.png) | ![Dark theme](Media/console_1.png) |
+| ![Default theme](Media/gui_2.png) |  |
+| ![Default theme](Media/gui_3.png) |  |
+| ![Default theme](Media/gui_4.png) |  |
 
 ## Code base
 
