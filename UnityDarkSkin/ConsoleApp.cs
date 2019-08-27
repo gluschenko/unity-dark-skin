@@ -46,6 +46,7 @@ namespace UnityDarkSkin
 
             if (key.Key == ConsoleKey.Y)
             {
+                Console.WriteLine("");
                 Console.WriteLine("Detecting version...");
                 Version version = Patcher.DetectVersion();
                 if (version != null)

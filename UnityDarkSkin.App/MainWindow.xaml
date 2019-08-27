@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UnityDarkSkin.App"
         mc:Ignorable="d"
-        Title="Unity Dark Skin: GUI" MinHeight="370" MinWidth="300" Height="300" Width="300">
+        Title="Unity Dark Skin: GUI" 
+        MinHeight="380" MinWidth="320"
+        Height="380" Width="320">
 
     <Grid>
         <Grid x:Name="StartScreen" Background="#333" Visibility="Hidden">
@@ -14,7 +16,7 @@
 
         <Grid x:Name="PatchScreen">
             <StackPanel>
-                <Label>Editor directory path</Label>
+                <Label>Editor directory</Label>
                 <Grid Margin="4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="220*"/>
@@ -25,7 +27,7 @@
                 </Grid>
                 <Label>Choose your version</Label>
                 <Grid Margin="4">
-                    <ComboBox x:Name="VersionsCombo" Text="ddd"/>
+                    <ComboBox x:Name="VersionsCombo" Text="dd"/>
                 </Grid>
                 <Label>Current theme</Label>
                 <StackPanel Orientation="Horizontal">

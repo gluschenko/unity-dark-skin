@@ -10,7 +10,7 @@ namespace UnityDarkSkin
         public const string AppVersion = "1.4";
         public static ConsoleApp App;
 
-        static void Main(string[] args)
+        static void Main()
         {
             Console.Title = $"Unity Dark Skin: Console v{AppVersion}";
 
