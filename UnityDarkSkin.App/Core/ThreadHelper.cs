@@ -27,6 +27,10 @@ namespace UnityDarkSkin.App.Core
                 {
                     actions.Dequeue()?.Invoke();
                 }
+                else
+                {
+                    Thread.Sleep(1);
+                }
             }
         }
 

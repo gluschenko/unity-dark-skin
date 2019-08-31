@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UnityDarkSkin.App"
         mc:Ignorable="d"
-        Title="Unity Dark Skin: GUI" 
+        Title="Unity Dark Skin" 
         MinHeight="380" MinWidth="320"
         Height="380" Width="320">
 
