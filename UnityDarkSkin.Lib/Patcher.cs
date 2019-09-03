@@ -156,7 +156,7 @@ namespace UnityDarkSkin.Lib
             string FileName = Path.GetFileName(FilePath);
 
             DateTime date = DateTime.Now;
-            string NewFileName = $"Backup_{date.Day}-{date.Month}-{date.Year}_{date.Hour}:{date.Minute}:{date.Second}_{FileName}";
+            string NewFileName = $"Backup_{date.Day}-{date.Month}-{date.Year}_{date.Hour}-{date.Minute}-{date.Second}_{FileName}";
             string NewPath = Path.Combine(FileDir, NewFileName);
 
             File.WriteAllBytes(NewPath, Data);
