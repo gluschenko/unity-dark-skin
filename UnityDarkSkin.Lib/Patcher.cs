@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 
 namespace UnityDarkSkin.Lib
@@ -106,7 +107,7 @@ namespace UnityDarkSkin.Lib
             if (!IsLoaded)
                 throw new InvalidOperationException("File is not loaded");
             //
-            foreach (Version version in Versions.Get())
+            foreach (Version version in Versions.Get().Reverse())
             {
                 int light = Search(version.LightBytes);
                 int dark = Search(version.DarkBytes);

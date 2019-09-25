@@ -41,10 +41,20 @@ namespace UnityDarkSkin.Lib
                 darkBytes: new byte[] { 0x74, 0x15, 0x33, 0xC0, 0xEB, 0x13, 0x90, 0x49 }
             ),
             new Version (
-                name: "2019.3 (beta)",
+                name: "2019.3.0 (beta)",
                 lightBytes: new byte[] { 0x75, 0x15, 0x33, 0xC0, 0xEB, 0x13, 0x90, 0x49 },
                 darkBytes: new byte[] { 0x74, 0x15, 0x33, 0xC0, 0xEB, 0x13, 0x90, 0x49 }
             ),
+            /*
+            00007FF68BD659B9  75 15 33 C0 EB 13 90 49 FF C0 42 80 3C 03 00 0F  u.3Àë..IÿÀB.<... 
+            000000014126BCD0  74 08 33 C0 48 83 C4 30 5B C3 8B 03 48 83 C4 30  t.3ÀH.Ä0[Ã..H.Ä0  
+            000000014126BCB8  75 F6 48 89 54 24 28 48 8D 54 24 20 4C 89 44 24  uöH.T$(H.T$ L.D$  
+             */
+            /*new Version (
+                name: "2019.3.0b4 (beta)",
+                lightBytes: new byte[] { 0x74, 0x08, 0x33, 0xC0, 0x48, 0x83, 0xC4, 0x30, 0x5B, 0xC3, 0x8B, 0x03, 0x48, 0x83, 0xC4, 0x30 },
+                darkBytes: new byte[] { 0x75, 0x08, 0x33, 0xC0, 0x48, 0x83, 0xC4, 0x30, 0x5B, 0xC3, 0x8B, 0x03, 0x48, 0x83, 0xC4, 0x30 }
+            ),*/
         };
 
         public static Version[] Get()
