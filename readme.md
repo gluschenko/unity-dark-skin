@@ -21,10 +21,10 @@ This tool makes Dark Theme in Unity Editor and turns it back to white, if you wi
 | 2018.4 | ✅ | 2018.4.5f1 |
 | 2019.1 | ✅ | 2019.1.0f2 |
 | 2019.2 | ✅ | 2019.2.0f1 |
-| 2019.3 | ✅ | 2019.3.0b1 |
-| 2019.4 | ❌ | -          |
+| 2019.3 | ⚠️ | 2019.3.0b1 |
+| 2020.1 | ❌ | -          |
 
-✅ - Supported | ⚠️ - Will be supported soon | ❌ - Not supported
+✅ - Supported | ⚠️ - Work in progress | ❌ - Not supported
 
 ## How it works
 
