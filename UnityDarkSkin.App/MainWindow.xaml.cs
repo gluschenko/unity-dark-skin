@@ -1,21 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media.Effects;
+using UnityDarkSkin.App.Core;
+using UnityDarkSkin.Lib;
+using Version = UnityDarkSkin.Lib.Version;
+
+/*using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
-using UnityDarkSkin.App.Core;
-using UnityDarkSkin.Lib;
-using Version = UnityDarkSkin.Lib.Version;
+using System.Windows.Shapes;*/
 
 namespace UnityDarkSkin.App
 {
@@ -67,7 +68,7 @@ namespace UnityDarkSkin.App
 
         public void LoadData()
         {
-            Data = Manager.Load(ThrowException);
+            Data = Manager.Load(MessageHelper.ThrowException);
             //
             if (Data.WindowWidth > 0)
                 Width = Data.WindowWidth;
@@ -80,7 +81,7 @@ namespace UnityDarkSkin.App
             Data.WindowWidth = Width;
             Data.WindowHeight = Height;
             //
-            Manager.Save(Data, ThrowException);
+            Manager.Save(Data, MessageHelper.ThrowException);
         }
 
         // Event handlers
@@ -126,12 +127,12 @@ namespace UnityDarkSkin.App
                         }
                         catch (Exception ex)
                         {
-                            Error($"Could not to save {EditorFileName}! Check access permissions.\n\nDetails:\n\n{ex}");
+                            MessageHelper.Error($"Could not to save {EditorFileName}! Check access permissions.\n\nDetails:\n\n{ex}");
                         }
                     }
                     else
                     {
-                        Error("Could not to switch theme");
+                        MessageHelper.Error("Could not to switch theme");
                     }
 
                     Dispatcher.Invoke(() => {
@@ -152,7 +153,7 @@ namespace UnityDarkSkin.App
                 }
                 catch (Exception ex)
                 {
-                    ThrowException(ex);
+                    MessageHelper.ThrowException(ex);
                 }
 
                 Dispatcher.Invoke(() => {
@@ -207,7 +208,7 @@ namespace UnityDarkSkin.App
             }
             else
             {
-                Error($"There is no {EditorFileName}. Try choose another folder");
+                MessageHelper.Error($"There is no {EditorFileName}. Try choose another folder");
             }
         }
 
@@ -244,7 +245,7 @@ namespace UnityDarkSkin.App
                     }
                     else
                     {
-                        Error("This version is not supported. Try another version of Unity");
+                        MessageHelper.Error("This version is not supported. Try another version of Unity");
                     }
                 });
             });
@@ -264,7 +265,7 @@ namespace UnityDarkSkin.App
                     SetThemeThumbs(theme);
                     if (theme == ThemeType.None)
                     {
-                        Error("Could not find signature");
+                        MessageHelper.Error("Could not find signature");
                     }
                 });
             });
@@ -282,7 +283,7 @@ namespace UnityDarkSkin.App
             }
             else
             {
-                Error($"There is no backup files. Make a first backup!");
+                MessageHelper.Error($"There is no backup files. Make a first backup!");
             }
 
             void RestoreBackup(string path)
@@ -294,7 +295,7 @@ namespace UnityDarkSkin.App
                 }
                 catch (Exception ex)
                 {
-                    ThrowException(ex);
+                    MessageHelper.ThrowException(ex);
                 }
             }
         }
@@ -344,12 +345,5 @@ namespace UnityDarkSkin.App
             Freeze(true);
             ProcessState.Content = text;
         }
-
-        // Alert windows
-        public void Alert(string text, string title = "Alert") => MessageBox.Show(text, title, MessageBoxButton.OK, MessageBoxImage.Information);
-        public void Warning(string text, string title = "Warning") => MessageBox.Show(text, title, MessageBoxButton.OK, MessageBoxImage.Warning);
-        public void Error(string text, string title = "Error") => MessageBox.Show(text, title, MessageBoxButton.OK, MessageBoxImage.Error);
-        // Safer exception throwing (useful for live debugging OR I AM CODE MONKEY)
-        public void ThrowException(Exception exception) => Error(exception.ToString(), exception.GetType().Name);
     }
 }
