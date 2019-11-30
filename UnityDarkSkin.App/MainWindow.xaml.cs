@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Effects;
@@ -175,6 +176,25 @@ namespace UnityDarkSkin.App
                     OnBackupFilesFound(files);
                 });
             });
+        }
+
+        private void RunButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (File.Exists(Patcher.FilePath))
+            {
+                try
+                {
+                    System.Diagnostics.Process.Start(Patcher.FilePath);
+                }
+                catch (Exception ex)
+                {
+                    MessageHelper.ThrowException(ex);
+                }
+            }
+            else 
+            {
+                MessageHelper.Error($"File {Path.GetFileName(Patcher.FilePath)} does not exist!");
+            }
         }
 
         // Async callbacks

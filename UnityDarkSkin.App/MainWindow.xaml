@@ -41,6 +41,7 @@
                 </Grid>
             </StackPanel>
 
+            <Button Content="Run" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10" Style="{StaticResource LiteButtonStyle}" Click="RunButton_Click"></Button>
             <Button Content="SWITCH THEME" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10" Click="SwitchThemeButton_Click"></Button>
         </Grid>
 
