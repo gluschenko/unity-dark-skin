@@ -9,6 +9,12 @@ This tool makes Dark Theme in Unity Editor and turns it back to white, if you wi
 1. Compile it with Visual Studio and copy UnityDarkSkin.exe to folder where Unity.exe is located
 2. Run UnityDarkSkin.exe as **administrator**
 
+## Requirements
+
+* Windows 10
+* Visual Studio 2017 (or newer)
+* .NET Framework >= 4.5.2
+
 ## Supported versions
 
 | Version | Support | Version tested |
@@ -41,9 +47,10 @@ This tool makes Dark Theme in Unity Editor and turns it back to white, if you wi
 | ![GUI](Media/gui_3.png) |  |
 | ![GUI](Media/gui_4.png) |  |
 
-## Code base
+## Structure
 
-| Project >     | UnityDarkSkin | UnityDarkSkin.App | UnityDarkSkin.Lib |
-| --- | --- | --- | --- |
-| Description    | Legacy Console edition  | WPF app | DLL with patching tool|
-| .NET Framework | v 4.5.2       | v 4.5.2  | v 4.5.2  |
+| Namespace         | .NET Framework | Description             |
+| --- | --- | --- |
+| UnityDarkSkin     | >= 4.5.2       | Legacy Console edition  |
+| UnityDarkSkin.App | >= 4.5.2       | WPF app                 |
+| UnityDarkSkin.Lib | >= 4.5.2       | DLL with patching tool  |
