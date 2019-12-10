@@ -2,12 +2,22 @@
 
 ## About
 
-This tool makes Dark Theme in Unity Editor and turns it back to white, if you wish. It's being useful for Unity Personal, where Dark Theme is disabled by default. **It is not a crack! It's simply changing a couple of bits in Editor.exe**
+This tool makes Dark Theme in Unity Editor and turns it back to 'terrible' Light Theme, if you wish. It's being useful for Unity Personal, where theme settings are disabled by default. **It is not a crack! It's simply changing a couple of bits in Editor.exe**
 
 ## Usage
 
-1. Compile it with Visual Studio and copy UnityDarkSkin.exe to folder where Unity.exe is located
-2. Run UnityDarkSkin.exe as **administrator**
+1. Compile one of both projects (UnityDarkSkin or UnityDarkSkin.App) with Visual Studio<br>
+1.1. For **UnityDarkSkin** project: Move **UnityDarkSkin.exe** to folder where Unity.exe is located<br>
+1.2. For **UnityDarkSkin.App** project: Do nothing at this stage (**Unity Dark Skin.exe** is ready to work after compilation)<br>
+2. Run an executable file as **Administrator**<br>
+
+## Structure
+
+| Namespace         | .NET Framework | Role               |  Description |
+| --- | --- | --- | --- |
+| UnityDarkSkin     | >= 4.5.2       | Console application| Basic functionality via Console |
+| UnityDarkSkin.App | >= 4.5.2       | WPF application    | Advanced functionality via UI   |
+| UnityDarkSkin.Lib | >= 4.5.2       | Patcher library    | Versions data (byte records)    |
 
 ## Requirements
 
@@ -47,10 +57,4 @@ This tool makes Dark Theme in Unity Editor and turns it back to white, if you wi
 | ![GUI](Media/gui_3.png) |  |
 | ![GUI](Media/gui_4.png) |  |
 
-## Structure
 
-| Namespace         | .NET Framework | Description             |
-| --- | --- | --- |
-| UnityDarkSkin     | >= 4.5.2       | Legacy Console edition  |
-| UnityDarkSkin.App | >= 4.5.2       | WPF app                 |
-| UnityDarkSkin.Lib | >= 4.5.2       | Patcher lib, versions data |
