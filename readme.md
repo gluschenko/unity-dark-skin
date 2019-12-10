@@ -53,4 +53,4 @@ This tool makes Dark Theme in Unity Editor and turns it back to white, if you wi
 | --- | --- | --- |
 | UnityDarkSkin     | >= 4.5.2       | Legacy Console edition  |
 | UnityDarkSkin.App | >= 4.5.2       | WPF app                 |
-| UnityDarkSkin.Lib | >= 4.5.2       | DLL with patching tool  |
+| UnityDarkSkin.Lib | >= 4.5.2       | Patcher lib, versions data |
