@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using UnityDarkSkin.Lib;
 using Version = UnityDarkSkin.Lib.Version;
 
@@ -8,26 +7,28 @@ namespace UnityDarkSkin
 {
     public class ConsoleApp
     {
-        Patcher Patcher;
-        string FilePath;
+        Patcher _patcher;
+        string _filePath;
         string EditorFileName = "Unity.exe";
 
         public void Run()
         {
-            string Directory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            FilePath = Path.Combine(Directory, EditorFileName);
-            Console.WriteLine("\nSearch path: " + FilePath);
+            string directory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            _filePath = Path.Combine(directory, EditorFileName);
+            Console.WriteLine("\nSearch path: " + _filePath);
             //
-            if (File.Exists(FilePath))
+            if (File.Exists(_filePath))
             {
                 Console.WriteLine("Loading...");
-                Patcher = new Patcher(FilePath);
+                _patcher = new Patcher(_filePath);
 
-                try {
-                    Patcher.Load();
+                try
+                {
+                    _patcher.Load();
                     OnLoad();
                 }
-                catch (Exception ex) {
+                catch (Exception ex)
+                {
                     Console.WriteLine($"Failed to load {EditorFileName}. Please, try again with Administrator rights\n\n\n{ex}");
                 }
             }
@@ -39,19 +40,18 @@ namespace UnityDarkSkin
 
         void OnLoad()
         {
-            ConsoleKeyInfo key;
             Console.WriteLine("Choose your Unity version:");
             Console.WriteLine("Do you want to detect the version automatically or manually? (y/n)");
-            key = Console.ReadKey();
+            ConsoleKeyInfo key = Console.ReadKey();
 
             if (key.Key == ConsoleKey.Y)
             {
                 Console.WriteLine("");
                 Console.WriteLine("Detecting version...");
-                Version version = Patcher.DetectVersion();
+                Version version = _patcher.DetectVersion();
                 if (version != null)
                 {
-                    Patcher.CurrentVersion = version;
+                    _patcher.CurrentVersion = version;
                     OnVersionDetected();
                 }
                 else
@@ -78,7 +78,7 @@ namespace UnityDarkSkin
                         ver--;
                         if (ver >= 0 && ver < versions.Length)
                         {
-                            Patcher.CurrentVersion = versions[ver];
+                            _patcher.CurrentVersion = versions[ver];
                             OnVersionDetected();
                             break;
                         }
@@ -89,11 +89,11 @@ namespace UnityDarkSkin
 
         void OnVersionDetected()
         {
-            Console.WriteLine($"\nVesrion: {Patcher.CurrentVersion ?? null}\n");
+            Console.WriteLine($"\nVersion: {_patcher.CurrentVersion ?? null}\n");
 
             Console.WriteLine("Detecting theme...");
 
-            ThemeType theme = Patcher.DetectTheme(Patcher.CurrentVersion);
+            ThemeType theme = _patcher.DetectTheme(_patcher.CurrentVersion);
 
             if (theme == ThemeType.None)
             {
@@ -116,14 +116,14 @@ namespace UnityDarkSkin
             Console.ReadKey();
             Console.WriteLine("Please wait...");
 
-            ThemeType newTheme = Patcher.CurrentTheme == ThemeType.Light ? ThemeType.Dark : ThemeType.Light;
-            ThemeType theme = Patcher.SetTheme(newTheme);
+            ThemeType newTheme = _patcher.CurrentTheme == ThemeType.Light ? ThemeType.Dark : ThemeType.Light;
+            ThemeType theme = _patcher.SetTheme(newTheme);
 
             if (newTheme == theme)
             {
                 try
                 {
-                    Patcher.Save();
+                    _patcher.Save();
 
                     Console.WriteLine("--------");
                     Console.WriteLine($"Congrats! Theme changed into {theme} :D");

@@ -5,7 +5,7 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
 
-        <Style x:Key="ThemeThumb"  TargetType="{x:Type Label}">
+        <Style x:Key="ThemeThumb" TargetType="{x:Type Label}">
             <Setter Property="Foreground" Value="White" />
             <Setter Property="Content" Value="" />
             <Setter Property="FontSize" Value="15" />
@@ -16,16 +16,17 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Label}">
                         <Grid Width="{TemplateBinding Width}">
-                            <Border CornerRadius="5" Background="{TemplateBinding Background}" SnapsToDevicePixels="True"></Border>
-                            <Label 
-                                Foreground="{TemplateBinding Foreground}" 
-                                Content="{TemplateBinding Content}" 
-                                FontSize="{TemplateBinding FontSize}" 
-                                HorizontalContentAlignment="Center" 
-                                VerticalContentAlignment="Center"></Label>
+                            <Border CornerRadius="5" Background="{TemplateBinding Background}"
+                                    SnapsToDevicePixels="True" />
+                            <Label
+                                Foreground="{TemplateBinding Foreground}"
+                                Content="{TemplateBinding Content}"
+                                FontSize="{TemplateBinding FontSize}"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center" />
 
                             <Grid.Effect>
-                                <DropShadowEffect BlurRadius="5" Opacity="0.25" ShadowDepth="2"/>
+                                <DropShadowEffect BlurRadius="5" Opacity="0.25" ShadowDepth="2" />
                             </Grid.Effect>
                         </Grid>
                     </ControlTemplate>
@@ -44,13 +45,17 @@
             <Setter Property="FontSize" Value="15" />
             <Setter Property="SnapsToDevicePixels" Value="True" />
             <Setter Property="Padding" Value="16 8" />
-            
+
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Padding="{TemplateBinding Padding}" CornerRadius="6" BorderBrush="{TemplateBinding Foreground}" BorderThickness="1" Background="{TemplateBinding Background}">
+                        <Border Padding="{TemplateBinding Padding}" CornerRadius="6"
+                                BorderBrush="{TemplateBinding Foreground}" BorderThickness="1"
+                                Background="{TemplateBinding Background}">
                             <Grid>
-                                <ContentPresenter x:Name="__" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" />
+                                <ContentPresenter x:Name="__" Content="{TemplateBinding Content}"
+                                                  HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                  Margin="0,0,0,0" />
                             </Grid>
                         </Border>
 
@@ -80,7 +85,7 @@
             <Setter Property="Foreground" Value="#333" />
         </Style>
 
-        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ResourceKey=buttonStyle}"/>
+        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ResourceKey=buttonStyle}" />
 
         <!-- ComboBox -->
         <Style x:Key="ComboBoxStyle" TargetType="{x:Type ComboBox}">
@@ -111,7 +116,7 @@
             </Setter>-->
         </Style>
 
-        <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource ResourceKey=ComboBoxStyle}"/>
+        <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource ResourceKey=ComboBoxStyle}" />
 
         <!-- TextBox -->
         <Style TargetType="{x:Type TextBox}">
@@ -124,24 +129,27 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TextBox}">
-                        <Border x:Name="border" CornerRadius="5" BorderBrush="#BBB" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
-                            <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        <Border x:Name="border" CornerRadius="5" BorderBrush="#BBB"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="False"
+                                          HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsEnabled" Value="False">
-                                <Setter Property="Opacity" TargetName="border" Value="0.5"/>
+                                <Setter Property="Opacity" TargetName="border" Value="0.5" />
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="BorderBrush" TargetName="border" Value="#FFBBBBBB"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FFBBBBBB" />
                             </Trigger>
                             <Trigger Property="IsKeyboardFocused" Value="True">
-                                <Setter Property="BorderBrush" TargetName="border" Value="#FF999999"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF999999" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
     </Application.Resources>
 </Application>

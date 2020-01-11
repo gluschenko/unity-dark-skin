@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UnityDarkSkin.Lib
+﻿namespace UnityDarkSkin.Lib
 {
     public class Version
     {
-        public readonly string Name;
+        private readonly string _name;
         public readonly byte[] LightBytes;
         public readonly byte[] DarkBytes;
 
         public Version(string name, byte[] lightBytes, byte[] darkBytes)
         {
-            Name = name;
+            _name = name;
             LightBytes = lightBytes;
             DarkBytes = darkBytes;
         }
@@ -26,7 +20,7 @@ namespace UnityDarkSkin.Lib
 
         public override string ToString()
         {
-            return Name;
+            return _name;
         }
     }
 }
