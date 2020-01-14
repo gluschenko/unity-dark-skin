@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
 namespace UnityDarkSkin.App.Core
 {
@@ -9,8 +7,8 @@ namespace UnityDarkSkin.App.Core
     {
         [DataMember]
         public double WindowWidth;
+
         [DataMember]
         public double WindowHeight;
     }
 }
-

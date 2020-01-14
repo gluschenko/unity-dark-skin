@@ -1,20 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading;
 
 namespace UnityDarkSkin.Lib
 {
     public class Patcher
     {
-        public string FilePath { get; private set; }
+        public string FilePath { get; }
         public Version CurrentVersion { get; set; }
-        public ThemeType CurrentTheme { get; set; }
-        public bool IsLoaded { get => Data != null; }
-        public byte[] Data { get; private set; }
+        public ThemeType CurrentTheme { get; private set; }
 
-        private int offset = 0;
+        private bool IsLoaded
+        {
+            get => Data != null;
+        }
+
+        private byte[] Data { get; set; }
+
+        private int _offset = 0;
 
         public Patcher(string path)
         {
@@ -23,7 +26,7 @@ namespace UnityDarkSkin.Lib
 
         public void Reset()
         {
-            offset = 0;
+            _offset = 0;
         }
 
         public void Load()
@@ -42,15 +45,15 @@ namespace UnityDarkSkin.Lib
             if (CurrentVersion == null)
                 throw new InvalidOperationException("Version is not detected");
 
-            if (offset == 0)
+            if (_offset == 0)
                 DetectTheme(CurrentVersion);
 
             var bytes = CurrentVersion.GetBytes(theme);
-            if (offset + bytes.Length < Data.Length)
+            if (_offset + bytes.Length < Data.Length)
             {
                 for (int i = 0; i < bytes.Length; ++i)
                 {
-                    Data[offset + i] = bytes[i];
+                    Data[_offset + i] = bytes[i];
                 }
             }
 
@@ -59,15 +62,15 @@ namespace UnityDarkSkin.Lib
 
         // Search in bytes: O(N)
         // Returns offset of first byte in query or -1
-        public int Search(byte[] search, int offset = 0)
+        private int Search(byte[] search, int offset = 0)
         {
             if (!IsLoaded)
                 throw new InvalidOperationException("File is not loaded");
             //
             int num = -1;
-            if (Data.Length > 0 && 
-                search.Length > 0 && 
-                offset <= Data.Length - search.Length && 
+            if (Data.Length > 0 &&
+                search.Length > 0 &&
+                offset <= Data.Length - search.Length &&
                 Data.Length >= search.Length)
             {
                 for (int i = offset; i <= Data.Length - search.Length; ++i)
@@ -85,6 +88,7 @@ namespace UnityDarkSkin.Lib
                                     break;
                                 }
                             }
+
                             if (flag)
                             {
                                 num = i;
@@ -99,6 +103,7 @@ namespace UnityDarkSkin.Lib
                     }
                 }
             }
+
             return num;
         }
 
@@ -117,7 +122,7 @@ namespace UnityDarkSkin.Lib
 
                 if (isLight || isDark)
                 {
-                    offset = Math.Max(light, dark);
+                    _offset = Math.Max(light, dark);
 
                     CurrentVersion = version;
                     return version;
@@ -129,8 +134,8 @@ namespace UnityDarkSkin.Lib
 
         public ThemeType DetectTheme(Version version)
         {
-            bool light = Search(version.LightBytes, offset) != -1;
-            bool dark = Search(version.DarkBytes, offset) != -1;
+            bool light = Search(version.LightBytes, _offset) != -1;
+            bool dark = Search(version.DarkBytes, _offset) != -1;
 
             if (light || dark)
                 CurrentTheme = light ? ThemeType.Light : ThemeType.Dark;
@@ -153,14 +158,14 @@ namespace UnityDarkSkin.Lib
             if (!IsLoaded)
                 throw new InvalidOperationException("File is not loaded");
 
-            string FileDir = Path.GetDirectoryName(FilePath);
-            string FileName = Path.GetFileName(FilePath);
+            string fileDir = Path.GetDirectoryName(FilePath);
+            string fileName = Path.GetFileName(FilePath);
 
             DateTime date = DateTime.Now;
-            string NewFileName = $"Backup_{date.Day}-{date.Month}-{date.Year}_{date.Hour}-{date.Minute}-{date.Second}_{FileName}";
-            string NewPath = Path.Combine(FileDir, NewFileName);
+            string NewFileName = $"Backup_{date.Day}-{date.Month}-{date.Year}_{date.Hour}-{date.Minute}-{date.Second}_{fileName}";
+            string newPath = Path.Combine(fileDir, NewFileName);
 
-            File.WriteAllBytes(NewPath, Data);
+            File.WriteAllBytes(newPath, Data);
         }
 
         public void RestoreBackup(string file)
@@ -175,5 +180,10 @@ namespace UnityDarkSkin.Lib
         }
     }
 
-    public enum ThemeType { None = 0, Light = 1, Dark = 2 }
+    public enum ThemeType
+    {
+        None = 0,
+        Light = 1,
+        Dark = 2
+    }
 }

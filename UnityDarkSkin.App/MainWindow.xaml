@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UnityDarkSkin.App"
         mc:Ignorable="d"
-        Title="Unity Dark Skin" 
+        Title="Unity Dark Skin"
         MinHeight="380" MinWidth="320"
         Height="380" Width="320">
 
     <Grid>
         <Grid x:Name="StartScreen" Background="#333" Visibility="Hidden">
-            <Button Content="OPEN"  Padding="16 8" HorizontalAlignment="Center" VerticalAlignment="Center" Click="OpenButton_Click"></Button>
+            <Button Content="OPEN" Padding="16 8" HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Click="OpenButton_Click" />
         </Grid>
 
         <Grid x:Name="PatchScreen">
@@ -19,35 +20,49 @@
                 <Label>Editor directory</Label>
                 <Grid Margin="4">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="220*"/>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="220*" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <TextBox x:Name="DirectoryTextBox" Margin="0,0,45,0" Grid.ColumnSpan="2" MouseDoubleClick="ChooseDirectoryButton_Click"/>
-                    <Button x:Name="ChooseDirectoryButton" Style="{StaticResource LiteButtonStyle}" Content="🖊️"  Padding="8"  HorizontalAlignment="Right" Grid.Column="1" Click="ChooseDirectoryButton_Click"></Button>
+                    <TextBox x:Name="DirectoryTextBox" Margin="0,0,45,0" Grid.ColumnSpan="2"
+                             MouseDoubleClick="ChooseDirectoryButton_Click" />
+                    <Button x:Name="ChooseDirectoryButton" Style="{StaticResource LiteButtonStyle}" Content="🖊️"
+                            Padding="8" HorizontalAlignment="Right" Grid.Column="1" Click="ChooseDirectoryButton_Click" />
                 </Grid>
                 <Label>Choose your version</Label>
                 <Grid Margin="4">
-                    <ComboBox x:Name="VersionsCombo" Text="dd"/>
+                    <ComboBox x:Name="VersionsCombo" Text="dd" />
                 </Grid>
                 <Label>Current theme</Label>
                 <StackPanel Orientation="Horizontal">
-                    <Label x:Name="LightTheme" Style="{StaticResource ThemeThumbSelected}" Background="#aaa" Margin="5"></Label>
-                    <Label x:Name="DarkTheme" Style="{StaticResource ThemeThumb}" Background="#222" Margin="5"></Label>
+                    <Label x:Name="LightTheme" Style="{StaticResource ThemeThumbSelected}" Background="#aaa" Margin="5" />
+                    <Label x:Name="DarkTheme" Style="{StaticResource ThemeThumb}" Background="#222" Margin="5" />
                 </StackPanel>
                 <Label>Backup</Label>
                 <Grid Margin="4">
-                    <Button HorizontalAlignment="Left" Style="{StaticResource LiteButtonStyle}" Click="MakeBackupButton_Click">Make backup</Button>
-                    <Button HorizontalAlignment="Right" Style="{StaticResource RedButtonStyle}" Click="RestoreBackupButton_Click">Restore</Button>
+                    <Button HorizontalAlignment="Left" Style="{StaticResource LiteButtonStyle}"
+                            Click="MakeBackupButton_Click">
+                        Make backup
+                    </Button>
+                    <Button HorizontalAlignment="Right" Style="{StaticResource RedButtonStyle}"
+                            Click="RestoreBackupButton_Click">
+                        Restore
+                    </Button>
                 </Grid>
             </StackPanel>
 
-            <Button Content="Run" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10" Style="{StaticResource LiteButtonStyle}" Click="RunButton_Click"></Button>
-            <Button Content="SWITCH THEME" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10" Click="SwitchThemeButton_Click"></Button>
+            <Button Content="Run" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10"
+                    Style="{StaticResource LiteButtonStyle}" Click="RunButton_Click" />
+            <Button Content="SWITCH THEME" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10"
+                    Click="SwitchThemeButton_Click" />
         </Grid>
 
         <Grid x:Name="ProcessingScreen" Background="#CC222222" Visibility="Hidden">
-            <Label x:Name="ProcessState" Foreground="#fff" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center">Processing...</Label>
-            <ProgressBar x:Name="ProgessBar" Height="3" Margin="30 60" Foreground="#f50" Background="#fff" BorderThickness="0" VerticalAlignment="Bottom" Visibility="Hidden" Maximum="1" Value="0.4"></ProgressBar>
+            <Label x:Name="ProcessState" Foreground="#fff" FontSize="18" HorizontalAlignment="Center"
+                   VerticalAlignment="Center">
+                Processing...
+            </Label>
+            <ProgressBar x:Name="ProgessBar" Height="3" Margin="30 60" Foreground="#f50" Background="#fff"
+                         BorderThickness="0" VerticalAlignment="Bottom" Visibility="Hidden" Maximum="1" Value="0.4" />
         </Grid>
 
     </Grid>
