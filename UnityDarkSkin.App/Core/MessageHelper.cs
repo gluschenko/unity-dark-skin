@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 
-namespace UnityDarkSkin.App
+namespace UnityDarkSkin.Core
 {
     /// <summary>
     /// Easy templating of System.Windows.MessageBox

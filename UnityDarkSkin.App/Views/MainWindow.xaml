@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:UnityDarkSkin.App"
         mc:Ignorable="d"
         Title="Unity Dark Skin" 
+        Icon="/Assets/Icon.ico"
         MinHeight="380" MinWidth="320"
         Height="380" Width="320">
 

@@ -2,28 +2,26 @@
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.WindowsAPICodePack.Dialogs;
 
-namespace UnityDarkSkin.App.Core
+namespace UnityDarkSkin.Core
 {
     public class IOHelper
     {
         public static void OpenFolderDialog(string initialDirectory, Action<string> onDone = null, Action onCancel = null)
         {
-            var dialog = new CommonOpenFileDialog
+            using (var dialog = new CommonOpenFileDialog { InitialDirectory = initialDirectory, IsFolderPicker = true }) 
             {
-                IsFolderPicker = true,
-                InitialDirectory = initialDirectory
-            };
-            OpenDialog(dialog, onDone, onCancel);
+                OpenDialog(dialog, onDone, onCancel);
+            }
         }
 
         public static void OpenFileDialog(string initialDirectory, Action<string> onDone = null, Action onCancel = null)
         {
-            var dialog = new CommonOpenFileDialog { InitialDirectory = initialDirectory };
-            OpenDialog(dialog, onDone, onCancel);
+            using (var dialog = new CommonOpenFileDialog { InitialDirectory = initialDirectory }) 
+            {
+                OpenDialog(dialog, onDone, onCancel);
+            }
         }
 
         public static void OpenDialog(CommonOpenFileDialog dialog, Action<string> onDone, Action onCancel = null)
@@ -45,7 +43,7 @@ namespace UnityDarkSkin.App.Core
 
         public static string[] SearchFile(string directory, string file_name, bool recursive = true, bool contains_name = false)
         {
-            List<string> files = new List<string>();
+            var files = new List<string>();
             InternalSearchFile(ref files, directory, file_name, recursive, contains_name);
             return files.ToArray();
         }
@@ -75,10 +73,12 @@ namespace UnityDarkSkin.App.Core
                 }
                 //
 
-                foreach (string dir in sub_dirs)
+                if (recursive) 
                 {
-                    if(recursive)
+                    foreach (string dir in sub_dirs)
+                    {
                         InternalSearchFile(ref files, dir, file_name, recursive, contains_name);
+                    }
                 }
             }
         }

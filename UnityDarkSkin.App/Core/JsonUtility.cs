@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using System.Runtime.Serialization.Json;
 
-namespace UnityDarkSkin.App.Core
+namespace UnityDarkSkin.Core
 {
     public class JsonUtility
     {

@@ -13,17 +13,20 @@ This tool makes Dark Theme in Unity Editor and turns it back to 'terrible' Light
 
 ## Structure
 
-| Namespace         | .NET Framework | Role               |  Description |
+| Namespace              | .NET version    | Role               |  Description                     |
 | --- | --- | --- | --- |
-| UnityDarkSkin     | >= 4.5.2       | Console application| Basic functionality via Console |
-| UnityDarkSkin.App | >= 4.5.2       | WPF application    | Advanced functionality via UI   |
-| UnityDarkSkin.Lib | >= 4.5.2       | Patcher library    | Versions data (byte records)    |
+| UnityDarkSkin          | >= 4.8          | Console application| Basic functionality via Console  |
+| UnityDarkSkin.App      | >= 4.8          | WPF application    | Advanced functionality via UI    |
+| UnityDarkSkin.AppCross | >= Core 3.0     | Cross-platform app | Experimantal port on Avalonia UI |
+| UnityDarkSkin.Lib      | >= 4.8          | Patcher library    | Versions data (byte records)     |
 
 ## Requirements
 
-* Windows 10
-* Visual Studio 2017 (or newer)
-* .NET Framework >= 4.5.2
+* Windows 8/10
+* Visual Studio 2019 (or newer)
+* .NET Framework >= 4.8
+* .NET Core >= 3.0
+* .NET Standard 2.0 support
 
 ## Supported versions
 

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityDarkSkin.App", "UnityD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityDarkSkin.Lib", "UnityDarkSkin.Lib\UnityDarkSkin.Lib.csproj", "{7BD8B9A9-3504-4481-953D-D9A43EFDE3D4}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnityDarkSkin.AppCross", "UnityDarkSkin.AppCross\UnityDarkSkin.AppCross.csproj", "{BC984499-C0B4-4EC2-8438-BA501F3197BC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{7BD8B9A9-3504-4481-953D-D9A43EFDE3D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BD8B9A9-3504-4481-953D-D9A43EFDE3D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BD8B9A9-3504-4481-953D-D9A43EFDE3D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC984499-C0B4-4EC2-8438-BA501F3197BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC984499-C0B4-4EC2-8438-BA501F3197BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC984499-C0B4-4EC2-8438-BA501F3197BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC984499-C0B4-4EC2-8438-BA501F3197BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

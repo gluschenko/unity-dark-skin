@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 
-namespace UnityDarkSkin.App.Core
+namespace UnityDarkSkin.Core
 {
     // Singleton thread manager
     public static class ThreadHelper

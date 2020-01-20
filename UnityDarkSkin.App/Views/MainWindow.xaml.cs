@@ -3,8 +3,8 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Effects;
-using UnityDarkSkin.App.Core;
 using UnityDarkSkin.Lib;
+using UnityDarkSkin.Core;
 using Version = UnityDarkSkin.Lib.Version;
 
 /*using System.Collections.Generic;

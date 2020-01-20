@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace UnityDarkSkin.App.Core
+namespace UnityDarkSkin.Core
 {
     [DataContract]
     public class ApplicationData
