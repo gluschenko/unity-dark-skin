@@ -12,34 +12,6 @@
   </Application.Styles>
 
   <Application.Resources>
-    <Style x:Key="ThemeThumb" Selector="TextBlock">
-      <Setter Property="Foreground" Value="White" />
-      <Setter Property="FontSize" Value="15" />
-      <Setter Property="Width" Value="60" />
-      <Setter Property="Height" Value="40" />
-
-      <!--<Setter Property="Template">
-        <Setter.Value>
-          <ControlTemplate TargetType="{x:Type TextBlock}">
-            <Grid Width="{TemplateBinding Width}">
-              <Border CornerRadius="5" Background="{TemplateBinding Background}"></Border>
-              <TextBlock
-                  Foreground="{TemplateBinding Foreground}"
-                  Text="{TemplateBinding Text}"
-                  FontSize="{TemplateBinding FontSize}"
-                  ></TextBlock>
-            </Grid>
-          </ControlTemplate>
-        </Setter.Value>
-      </Setter>-->
-    </Style>
-
-    <Style x:Key="123" Selector="Button">
-      <Setter Property="Foreground" Value="#FFFFFFFF" />
-      <Setter Property="BorderThickness" Value ="2" />
-      <Setter Property="Background" Value="#FFDD4812" />
-      <Setter Property="BorderBrush" Value="#FFFFFFFF" />
-    </Style>
 
     <!-- Button -->
     <!--<Style x:Key="buttonStyle" Selector="Button">
