@@ -41,14 +41,14 @@ namespace UnityDarkSkin.Core
 
         //
 
-        public static string[] SearchFile(string directory, string file_name, bool recursive = true, bool contains_name = false)
+        public static string[] SearchFile(string directory, string fileName, bool recursive = true, bool containsName = false)
         {
             var files = new List<string>();
             InternalSearchFile(ref files, directory, file_name, recursive, contains_name);
             return files.ToArray();
         }
 
-        private static void InternalSearchFile(ref List<string> files, string directory, string file_name, bool recursive, bool contains_name)
+        private static void InternalSearchFile(ref List<string> files, string directory, string fileName, bool recursive, bool containsName)
         {
             if (Directory.Exists(directory))
             {
@@ -60,15 +60,16 @@ namespace UnityDarkSkin.Core
                     sub_dirs = Directory.GetDirectories(directory);
                     //
                     Func<string, bool> search;
-                    if (contains_name)
-                        search = (p) => Path.GetFileName(p).Contains(file_name);
+                    if (containsName)
+                        search = (p) => Path.GetFileName(p).Contains(fileName);
                     else
-                        search = (p) => Path.GetFileName(p).Equals(file_name);
+                        search = (p) => Path.GetFileName(p).Equals(fileName);
 
                     matchingFiles = Directory.GetFiles(directory).Where(search).ToArray();
                     files.AddRange(matchingFiles);
                 }
-                catch {
+                catch
+                {
                     // Don't care
                 }
                 //

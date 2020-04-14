@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 
@@ -7,15 +7,15 @@ namespace UnityDarkSkin.Core
     // Singleton thread manager
     public static class ThreadHelper
     {
-        private static Thread thread;
-        private static readonly Queue<Action> actions = new Queue<Action>();
+        private static Thread _thread;
+        private static readonly Queue<Action> Actions = new Queue<Action>();
 
         private static void Init()
         {
-            if (thread == null)
+            if (_thread == null)
             {
-                thread = new Thread(ThreadProc) { IsBackground = true };
-                thread.Start();
+                _thread = new Thread(ThreadProc) {IsBackground = true};
+                _thread.Start();
             }
         }
 
@@ -23,9 +23,9 @@ namespace UnityDarkSkin.Core
         {
             while (true)
             {
-                if (actions.Count > 0)
+                if (Actions.Count > 0)
                 {
-                    actions.Dequeue()?.Invoke();
+                    Actions.Dequeue()?.Invoke();
                 }
                 else
                 {
@@ -39,7 +39,7 @@ namespace UnityDarkSkin.Core
             if (action != null)
             {
                 Init();
-                actions.Enqueue(action);
+                Actions.Enqueue(action);
             }
         }
     }

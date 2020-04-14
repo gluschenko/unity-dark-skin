@@ -37,7 +37,7 @@ namespace UnityDarkSkin.Core
 
         public static T FromJson<T>(string json)
         {
-            return (T)FromJson(json, typeof(T));
+            return (T) FromJson(json, typeof(T));
         }
 
         /*public static void FromJsonOverwrite(string json, object objectToOverwrite)
@@ -68,4 +68,3 @@ namespace UnityDarkSkin.Core
         }
     }*/
 }
-

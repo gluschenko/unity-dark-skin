@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Runtime.Serialization;
 
 namespace UnityDarkSkin.Core
 {
     public class DataManager<T>
     {
-        public string Path { get; set; }
+        private string Path { get; set; }
 
         public DataManager(string path)
         {
@@ -28,6 +26,7 @@ namespace UnityDarkSkin.Core
                     onError?.Invoke(ex);
                 }
             }
+
             return Activator.CreateInstance<T>();
         }
 
@@ -44,5 +43,4 @@ namespace UnityDarkSkin.Core
             }
         }
     }
-
 }
