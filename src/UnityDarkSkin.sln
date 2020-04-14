@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityDarkSkin", "src\UnityDarkSkin\UnityDarkSkin.csproj", "{262BB00F-6900-47BD-8B1C-2136ED9A724C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityDarkSkin", "UnityDarkSkin\UnityDarkSkin.csproj", "{262BB00F-6900-47BD-8B1C-2136ED9A724C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityDarkSkin.App", "src\UnityDarkSkin.App\UnityDarkSkin.App.csproj", "{9D3C51BB-1491-407B-94DE-8F0916DA34FC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityDarkSkin.App", "UnityDarkSkin.App\UnityDarkSkin.App.csproj", "{9D3C51BB-1491-407B-94DE-8F0916DA34FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityDarkSkin.Lib", "src\UnityDarkSkin.Lib\UnityDarkSkin.Lib.csproj", "{7BD8B9A9-3504-4481-953D-D9A43EFDE3D4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityDarkSkin.Lib", "UnityDarkSkin.Lib\UnityDarkSkin.Lib.csproj", "{7BD8B9A9-3504-4481-953D-D9A43EFDE3D4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnityDarkSkin.AppCross", "src\UnityDarkSkin.AppCross\UnityDarkSkin.AppCross.csproj", "{BC984499-C0B4-4EC2-8438-BA501F3197BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnityDarkSkin.AppCross", "UnityDarkSkin.AppCross\UnityDarkSkin.AppCross.csproj", "{BC984499-C0B4-4EC2-8438-BA501F3197BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
