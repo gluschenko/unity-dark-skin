@@ -42,6 +42,7 @@ This tool makes Dark Theme in Unity Editor and turns it back to 'terrible' Light
 | 2019.2 | ✅ | 2019.2.0f1, 2019.2.14f1 |
 | 2019.3 | ✅ | 2019.3.0f1 |
 | 2020.1 | ✅ | 2020.1.0a14 |
+| 2020.1 | ⚠️ | 2020.1.0b5 |
 
 ✅ - Supported | ⚠️ - Work in progress | ❌ - Not supported
 
@@ -49,15 +50,15 @@ This tool makes Dark Theme in Unity Editor and turns it back to 'terrible' Light
 
 | Before | After |
 | :---: | :---: |
-| ![Default theme](Media/LightSkin.jpg) | ![Dark theme](Media/DarkSkin.jpg) |
+| ![Default theme](media/LightSkin.jpg) | ![Dark theme](media/DarkSkin.jpg) |
 
 ## Showcase
 
 | UnityDarkSkin.App | UnityDarkSkin |
 | :---: | :---: |
-| ![GUI](Media/gui_1.png) | ![Console](Media/console.png) |
-| ![GUI](Media/gui_2.png) |  |
-| ![GUI](Media/gui_3.png) |  |
-| ![GUI](Media/gui_4.png) |  |
+| ![GUI](media/gui_1.png) | ![Console](media/console.png) |
+| ![GUI](media/gui_2.png) |  |
+| ![GUI](media/gui_3.png) |  |
+| ![GUI](media/gui_4.png) |  |
 
 
