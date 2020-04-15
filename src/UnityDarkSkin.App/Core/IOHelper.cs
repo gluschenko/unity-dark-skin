@@ -44,7 +44,7 @@ namespace UnityDarkSkin.Core
         public static string[] SearchFile(string directory, string fileName, bool recursive = true, bool containsName = false)
         {
             var files = new List<string>();
-            InternalSearchFile(ref files, directory, file_name, recursive, contains_name);
+            InternalSearchFile(ref files, directory, fileName, recursive, containsName);
             return files.ToArray();
         }
 
@@ -78,7 +78,7 @@ namespace UnityDarkSkin.Core
                 {
                     foreach (string dir in sub_dirs)
                     {
-                        InternalSearchFile(ref files, dir, file_name, recursive, contains_name);
+                        InternalSearchFile(ref files, dir, fileName, recursive, containsName);
                     }
                 }
             }
