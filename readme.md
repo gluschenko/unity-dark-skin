@@ -50,15 +50,15 @@ This tool makes Dark Theme in Unity Editor and turns it back to 'terrible' Light
 
 | Before | After |
 | :---: | :---: |
-| ![Default theme](media/LightSkin.jpg) | ![Dark theme](media/DarkSkin.jpg) |
+| ![Default theme](Media/LightSkin.jpg) | ![Dark theme](Media/DarkSkin.jpg) |
 
 ## Showcase
 
 | UnityDarkSkin.App | UnityDarkSkin |
 | :---: | :---: |
-| ![GUI](media/gui_1.png) | ![Console](media/console.png) |
-| ![GUI](media/gui_2.png) |  |
-| ![GUI](media/gui_3.png) |  |
-| ![GUI](media/gui_4.png) |  |
+| ![GUI](Media/gui_1.png) | ![Console](Media/console.png) |
+| ![GUI](Media/gui_2.png) |  |
+| ![GUI](Media/gui_3.png) |  |
+| ![GUI](Media/gui_4.png) |  |
 
 
