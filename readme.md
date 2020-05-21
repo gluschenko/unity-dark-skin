@@ -17,7 +17,6 @@ This tool makes Dark Theme in Unity Editor and turns it back to 'terrible' Light
 | --- | --- | --- | --- |
 | UnityDarkSkin          | >= 4.8          | Console application| Basic functionality via Console  |
 | UnityDarkSkin.App      | >= 4.8          | WPF application    | Advanced functionality via UI    |
-| UnityDarkSkin.AppCross | >= Core 3.0     | Cross-platform app | Experimantal port on Avalonia UI |
 | UnityDarkSkin.Lib      | >= 4.8          | Patcher library    | Versions data (byte records)     |
 
 ## Requirements
@@ -41,8 +40,7 @@ This tool makes Dark Theme in Unity Editor and turns it back to 'terrible' Light
 | 2019.1 | ✅ | 2019.1.0f2 |
 | 2019.2 | ✅ | 2019.2.0f1, 2019.2.14f1 |
 | 2019.3 | ✅ | 2019.3.0f1 |
-| 2020.1 | ✅ | 2020.1.0a14 |
-| 2020.1 | ⚠️ | 2020.1.0b5 |
+| 2020.1 | ✅ | 2020.1.0b8 |
 
 ✅ - Supported | ⚠️ - Work in progress | ❌ - Not supported
 
