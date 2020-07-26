@@ -6,25 +6,25 @@ This tool makes Dark Theme in Unity Editor and turns it back to 'terrible' Light
 
 ## Usage
 
-1. Compile one of both projects (UnityDarkSkin or UnityDarkSkin.App) with Visual Studio<br>
+1. Compile one of both projects (UnityDarkSkin.App or UnityDarkSkin) with Visual Studio<br>
 1.1. For **UnityDarkSkin** project: Move **UnityDarkSkin.exe** to folder where Unity.exe is located<br>
 1.2. For **UnityDarkSkin.App** project: Do nothing at this stage (**Unity Dark Skin.exe** is ready to work after compilation)<br>
 2. Run an executable file as **Administrator**<br>
 
-## Structure
+## Projects
 
-| Namespace              | .NET version    | Role               |  Description                     |
+| Project                | .NET version    | Role               |  Description                     |
 | --- | --- | --- | --- |
-| UnityDarkSkin          | >= 4.8          | Console application| Basic functionality via Console  |
 | UnityDarkSkin.App      | >= 4.8          | WPF application    | Advanced functionality via UI    |
 | UnityDarkSkin.Lib      | >= 4.8          | Patcher library    | Versions data (byte records)     |
+| UnityDarkSkin (Legacy) | >= 4.8          | Console application| Basic functionality via Console  |
 
 ## Requirements
 
 * Windows 8/10
 * Visual Studio 2019 (or newer)
 * .NET Framework >= 4.8
-* .NET Core >= 3.0
+* .NET Core >= 3.1
 * .NET Standard 2.0 support
 
 ## Supported versions
@@ -36,11 +36,11 @@ This tool makes Dark Theme in Unity Editor and turns it back to 'terrible' Light
 | 2017.2 | ✅ | 2017.2     |
 | 2018.2 | ✅ | 2018.2     |
 | 2018.3 | ✅ | 2018.3.0f2 |
-| 2018.4 | ✅ | 2018.4.5f1, 2018.4.13f1 (LTS) |
+| 2018.4 | ✅ | 2018.4.24f1 (LTS) |
 | 2019.1 | ✅ | 2019.1.0f2 |
 | 2019.2 | ✅ | 2019.2.0f1, 2019.2.14f1 |
 | 2019.3 | ✅ | 2019.3.0f1 |
-| 2020.1 | ✅ | 2020.1.0b8 |
+| 2020.1 | ✅ | 2020.1.0f1 |
 
 ✅ - Supported | ⚠️ - Work in progress | ❌ - Not supported
 
