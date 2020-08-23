@@ -31,7 +31,7 @@ This tool makes Dark Theme in Unity Editor and turns it back to 'terrible' Light
 
 ## Supported versions
 
-| Version | Support | Tested on |
+| Version | Status | Tested on |
 | :--- | :---: | :--- |
 | 5.3    | ✅ | 5.3.5f1    |
 | 5.4    | ✅ | 5.4        |
