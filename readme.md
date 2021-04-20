@@ -1,6 +1,6 @@
 # UnityDarkSkin
 
-![](src/UnityDarkSkin/Icon.ico)
+![](src/UnityDarkSkin.App/Assets/Icon.ico)
 
 ## About
 
@@ -8,10 +8,8 @@ This tool makes Dark Theme in Unity Editor and turns it back to 'terrible' Light
 
 ## Usage
 
-1. Compile one of both projects (UnityDarkSkin.App or UnityDarkSkin) with Visual Studio<br>
-1.1. For **UnityDarkSkin** project: Move **UnityDarkSkin.exe** to folder where Unity.exe is located<br>
-1.2. For **UnityDarkSkin.App** project: Do nothing at this stage (**Unity Dark Skin.exe** is ready to work after compilation)<br>
-2. Run an executable file as **Administrator**<br>
+1. Compile `UnityDarkSkin.App` with Visual Studio
+2. Run an executable file as **Administrator**
 
 ## Projects
 
@@ -19,7 +17,6 @@ This tool makes Dark Theme in Unity Editor and turns it back to 'terrible' Light
 | --- | --- | --- | --- |
 | UnityDarkSkin.App      | Core 5.0        | WPF application    | Advanced functionality via UI    |
 | UnityDarkSkin.Lib      | Core 5.0        | Patcher library    | Versions data (byte records)     |
-| UnityDarkSkin (Legacy) | Core 5.0        | Console application| Basic functionality via Console  |
 
 ## Requirements
 
