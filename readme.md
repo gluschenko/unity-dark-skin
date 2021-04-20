@@ -17,9 +17,9 @@ This tool makes Dark Theme in Unity Editor and turns it back to 'terrible' Light
 
 | Project                | .NET version    | Role               |  Description                     |
 | --- | --- | --- | --- |
-| UnityDarkSkin.App      | >= 4.8          | WPF application    | Advanced functionality via UI    |
-| UnityDarkSkin.Lib      | >= 4.8          | Patcher library    | Versions data (byte records)     |
-| UnityDarkSkin (Legacy) | >= 4.8          | Console application| Basic functionality via Console  |
+| UnityDarkSkin.App      | Core 5.0        | WPF application    | Advanced functionality via UI    |
+| UnityDarkSkin.Lib      | Core 5.0        | Patcher library    | Versions data (byte records)     |
+| UnityDarkSkin (Legacy) | Core 5.0        | Console application| Basic functionality via Console  |
 
 ## Requirements
 
@@ -50,15 +50,15 @@ This tool makes Dark Theme in Unity Editor and turns it back to 'terrible' Light
 
 | Before | After |
 | :---: | :---: |
-| ![Default theme](Media/LightSkin.jpg) | ![Dark theme](Media/DarkSkin.jpg) |
+| ![Default theme](.media/LightSkin.jpg) | ![Dark theme](.media/DarkSkin.jpg) |
 
 ## Showcase
 
 | UnityDarkSkin.App | UnityDarkSkin |
 | :---: | :---: |
-| ![GUI](Media/gui_1.png) | ![Console](Media/console.png) |
-| ![GUI](Media/gui_2.png) |  |
-| ![GUI](Media/gui_3.png) |  |
-| ![GUI](Media/gui_4.png) |  |
+| ![GUI](.media/gui_1.png) | ![Console](.media/console.png) |
+| ![GUI](.media/gui_2.png) |  |
+| ![GUI](.media/gui_3.png) |  |
+| ![GUI](.media/gui_4.png) |  |
 
 

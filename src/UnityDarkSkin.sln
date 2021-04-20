@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityDarkSkin.App", "UnityD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityDarkSkin.Lib", "UnityDarkSkin.Lib\UnityDarkSkin.Lib.csproj", "{7BD8B9A9-3504-4481-953D-D9A43EFDE3D4}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DOC", "DOC", "{17471794-99F6-4302-8F16-88F899C9B25F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".docs", ".docs", "{17471794-99F6-4302-8F16-88F899C9B25F}"
 	ProjectSection(SolutionItems) = preProject
 		..\readme.md = ..\readme.md
 	EndProjectSection
