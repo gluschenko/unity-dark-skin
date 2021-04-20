@@ -17,7 +17,7 @@ jobs:
     - name: 📂 Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.100
+        dotnet-version: 5.0.x
 
     - name: 📂 Files
       working-directory: ${{env.ROOT}}
@@ -53,10 +53,7 @@ jobs:
     - name: 📂 Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.100
-        source-url: https://nuget.pkg.github.com/${{github.repository_owner}}/index.json
-      env:
-        NUGET_AUTH_TOKEN: ${{secrets.NUGET_READ_TOKEN}} 
+        dotnet-version: 5.0.x
 
     - name: 📂 Pack UnityDarkSkin.App
       working-directory: ${{env.ROOT}}/UnityDarkSkin.App/out
