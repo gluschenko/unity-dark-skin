@@ -2,6 +2,8 @@
 
 ![](src/UnityDarkSkin.App/Assets/Icon.ico)
 
+[![.NET Core Desktop](https://github.com/Gluschenko/UnityDarkSkin/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/Gluschenko/UnityDarkSkin/actions/workflows/build.yml)
+
 ## About
 
 This tool makes Dark Theme in Unity Editor and turns it back to 'terrible' Light Theme, if you wish. It's being useful for Unity Personal, where theme settings are disabled by default. **It is not a crack! It's simply changing a couple of bits in Editor.exe**
