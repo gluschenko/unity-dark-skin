@@ -10,18 +10,14 @@ namespace UnityDarkSkin.Core
     {
         public static void OpenFolderDialog(string initialDirectory, Action<string> onDone = null, Action onCancel = null)
         {
-            using (var dialog = new CommonOpenFileDialog { InitialDirectory = initialDirectory, IsFolderPicker = true }) 
-            {
-                OpenDialog(dialog, onDone, onCancel);
-            }
+            using var dialog = new CommonOpenFileDialog { InitialDirectory = initialDirectory, IsFolderPicker = true };
+            OpenDialog(dialog, onDone, onCancel);
         }
 
         public static void OpenFileDialog(string initialDirectory, Action<string> onDone = null, Action onCancel = null)
         {
-            using (var dialog = new CommonOpenFileDialog { InitialDirectory = initialDirectory }) 
-            {
-                OpenDialog(dialog, onDone, onCancel);
-            }
+            using var dialog = new CommonOpenFileDialog { InitialDirectory = initialDirectory };
+            OpenDialog(dialog, onDone, onCancel);
         }
 
         public static void OpenDialog(CommonOpenFileDialog dialog, Action<string> onDone, Action onCancel = null)
@@ -52,12 +48,12 @@ namespace UnityDarkSkin.Core
         {
             if (Directory.Exists(directory))
             {
-                string[] sub_dirs = new string[0];
-                string[] matchingFiles = new string[0];
+                var subDirs = Array.Empty<string>();
+                var matchingFiles = Array.Empty<string>();
 
                 try
                 {
-                    sub_dirs = Directory.GetDirectories(directory);
+                    subDirs = Directory.GetDirectories(directory);
                     //
                     Func<string, bool> search;
                     if (containsName)
@@ -76,7 +72,7 @@ namespace UnityDarkSkin.Core
 
                 if (recursive) 
                 {
-                    foreach (string dir in sub_dirs)
+                    foreach (string dir in subDirs)
                     {
                         InternalSearchFile(ref files, dir, fileName, recursive, containsName);
                     }

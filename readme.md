@@ -1,6 +1,6 @@
 # UnityDarkSkin
 
-![](src/UnityDarkSkin/Icon.ico)
+![](src/UnityDarkSkin.App/Assets/Icon.ico)
 
 ## About
 
@@ -8,18 +8,15 @@ This tool makes Dark Theme in Unity Editor and turns it back to 'terrible' Light
 
 ## Usage
 
-1. Compile one of both projects (UnityDarkSkin.App or UnityDarkSkin) with Visual Studio<br>
-1.1. For **UnityDarkSkin** project: Move **UnityDarkSkin.exe** to folder where Unity.exe is located<br>
-1.2. For **UnityDarkSkin.App** project: Do nothing at this stage (**Unity Dark Skin.exe** is ready to work after compilation)<br>
-2. Run an executable file as **Administrator**<br>
+1. Compile `UnityDarkSkin.App` with Visual Studio
+2. Run an executable file as **Administrator**
 
 ## Projects
 
 | Project                | .NET version    | Role               |  Description                     |
 | --- | --- | --- | --- |
-| UnityDarkSkin.App      | >= 4.8          | WPF application    | Advanced functionality via UI    |
-| UnityDarkSkin.Lib      | >= 4.8          | Patcher library    | Versions data (byte records)     |
-| UnityDarkSkin (Legacy) | >= 4.8          | Console application| Basic functionality via Console  |
+| UnityDarkSkin.App      | Core 5.0        | WPF application    | Advanced functionality via UI    |
+| UnityDarkSkin.Lib      | Core 5.0        | Patcher library    | Versions data (byte records)     |
 
 ## Requirements
 
@@ -50,15 +47,15 @@ This tool makes Dark Theme in Unity Editor and turns it back to 'terrible' Light
 
 | Before | After |
 | :---: | :---: |
-| ![Default theme](Media/LightSkin.jpg) | ![Dark theme](Media/DarkSkin.jpg) |
+| ![Default theme](.media/LightSkin.jpg) | ![Dark theme](.media/DarkSkin.jpg) |
 
 ## Showcase
 
 | UnityDarkSkin.App | UnityDarkSkin |
 | :---: | :---: |
-| ![GUI](Media/gui_1.png) | ![Console](Media/console.png) |
-| ![GUI](Media/gui_2.png) |  |
-| ![GUI](Media/gui_3.png) |  |
-| ![GUI](Media/gui_4.png) |  |
+| ![GUI](.media/gui_1.png) | ![Console](.media/console.png) |
+| ![GUI](.media/gui_2.png) |  |
+| ![GUI](.media/gui_3.png) |  |
+| ![GUI](.media/gui_4.png) |  |
 
 
