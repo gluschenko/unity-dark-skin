@@ -40,31 +40,5 @@ namespace UnityDarkSkin.Core
             return (T) FromJson(json, typeof(T));
         }
 
-        /*public static void FromJsonOverwrite(string json, object objectToOverwrite)
-        {
-            if (string.IsNullOrEmpty(json))
-                return;
-
-            if (objectToOverwrite == null)
-                throw new ArgumentNullException("objectToOverwrite");
-        }*/
     }
-
-    /*
-    using System.Runtime.Serialization;
-
-    [DataContract]
-    public class Person
-    {
-        [DataMember]
-        public string Name { get; set; }
-        [DataMember]
-        public int Age { get; set; }
-
-        public Person(string name, int year)
-        {
-            Name = name;
-            Age = year;
-        }
-    }*/
 }
