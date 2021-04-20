@@ -12,13 +12,11 @@ namespace UnityDarkSkin.Core
             if (obj == null)
                 return "";
 
-            DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(obj.GetType());
+            var jsonFormatter = new DataContractJsonSerializer(obj.GetType());
 
-            using (MemoryStream stream = new MemoryStream())
-            {
-                jsonFormatter.WriteObject(stream, obj);
-                return Encoding.UTF8.GetString(stream.ToArray());
-            }
+            using var stream = new MemoryStream();
+            jsonFormatter.WriteObject(stream, obj);
+            return Encoding.UTF8.GetString(stream.ToArray());
         }
 
         public static object FromJson(string json, Type type)
@@ -26,13 +24,11 @@ namespace UnityDarkSkin.Core
             if (string.IsNullOrEmpty(json))
                 return null;
             if (type == null)
-                throw new ArgumentNullException("type");
+                throw new ArgumentNullException(nameof(type));
 
-            using (MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
-            {
-                DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(type);
-                return jsonFormatter.ReadObject(stream);
-            }
+            using var stream = new MemoryStream(Encoding.UTF8.GetBytes(json));
+            DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(type);
+            return jsonFormatter.ReadObject(stream);
         }
 
         public static T FromJson<T>(string json)
