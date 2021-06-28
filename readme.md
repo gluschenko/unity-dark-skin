@@ -22,11 +22,9 @@ This tool makes Dark Theme in Unity Editor and turns it back to 'terrible' Light
 
 ## Requirements
 
-* Windows 8/10
+* Windows 10 (on newer)
 * Visual Studio 2019 (or newer)
-* .NET Framework >= 4.8
-* .NET Core >= 3.1
-* .NET Standard 2.0 support
+* .NET 5.0 SDK
 
 ## Supported versions
 
